@@ -25,3 +25,4 @@ hadoop과 연결 hadoop-3.3.6/sbin/start-all.sh
 
 acess_log 로 로컬에서 spark로 맵리듀싱
 https://www.mockaroo.com/ 랜덤 데이터 생성 
+# dmf-spark
