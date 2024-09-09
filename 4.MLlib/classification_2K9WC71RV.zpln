@@ -1,0 +1,843 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n## 로지스틱 회귀",
+      "user": "anonymous",
+      "dateUpdated": "2024-09-09 10:58:46.799",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003e로지스틱 회귀\u003c/h2\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1725846993361_901293875",
+      "id": "paragraph_1725846993361_901293875",
+      "dateCreated": "2024-09-09 10:56:33.361",
+      "dateStarted": "2024-09-09 10:58:46.800",
+      "dateFinished": "2024-09-09 10:58:46.806",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\ndf \u003d spark.read.csv(\u0027/user/ubuntu/input/airline/1988.csv\u0027, header\u003dTrue, inferSchema\u003dTrue)\ndf \u003d df.select(\u0027DayOfWeek\u0027, \u0027FlightNum\u0027, \u0027UniqueCarrier\u0027, \u0027Origin\u0027, \u0027Dest\u0027, \u0027Cancelled\u0027)\ndf.show()",
+      "user": "anonymous",
+      "dateUpdated": "2024-09-09 11:02:46.747",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "Year": "string",
+                      "Month": "string",
+                      "DayofMonth": "string",
+                      "DayOfWeek": "string",
+                      "DepTime": "string",
+                      "CRSDepTime": "string",
+                      "ArrTime": "string",
+                      "CRSArrTime": "string",
+                      "UniqueCarrier": "string",
+                      "FlightNum": "string",
+                      "TailNum": "string",
+                      "ActualElapsedTime": "string",
+                      "CRSElapsedTime": "string",
+                      "AirTime": "string",
+                      "ArrDelay": "string",
+                      "DepDelay": "string",
+                      "Origin": "string",
+                      "Dest": "string",
+                      "Distance": "string",
+                      "TaxiIn": "string",
+                      "TaxiOut": "string",
+                      "Cancelled": "string",
+                      "CancellationCode": "string",
+                      "Diverted": "string",
+                      "CarrierDelay": "string",
+                      "WeatherDelay": "string",
+                      "NASDelay": "string",
+                      "SecurityDelay": "string",
+                      "LateAircraftDelay": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---------+---------+-------------+------+----+---------+\n|DayOfWeek|FlightNum|UniqueCarrier|Origin|Dest|Cancelled|\n+---------+---------+-------------+------+----+---------+\n|        6|      942|           PI|   SYR| BWI|        0|\n|        7|      942|           PI|   SYR| BWI|        0|\n|        1|      942|           PI|   SYR| BWI|        0|\n|        2|      942|           PI|   SYR| BWI|        0|\n|        3|      942|           PI|   SYR| BWI|        0|\n|        4|      942|           PI|   SYR| BWI|        0|\n|        5|      942|           PI|   SYR| BWI|        0|\n|        6|      942|           PI|   SYR| BWI|        0|\n|        7|      942|           PI|   SYR| BWI|        0|\n|        1|      942|           PI|   SYR| BWI|        0|\n|        2|      942|           PI|   SYR| BWI|        0|\n|        3|      942|           PI|   SYR| BWI|        0|\n|        4|      942|           PI|   SYR| BWI|        0|\n|        5|      942|           PI|   SYR| BWI|        0|\n|        6|      942|           PI|   SYR| BWI|        0|\n|        7|      942|           PI|   SYR| BWI|        0|\n|        1|      942|           PI|   SYR| BWI|        0|\n|        2|      942|           PI|   SYR| BWI|        0|\n|        3|      942|           PI|   SYR| BWI|        0|\n|        4|      942|           PI|   SYR| BWI|        0|\n+---------+---------+-------------+------+----+---------+\nonly showing top 20 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d28"
+            },
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d29"
+            },
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d30"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1725847008815_1696478462",
+      "id": "paragraph_1725847008815_1696478462",
+      "dateCreated": "2024-09-09 10:56:48.815",
+      "dateStarted": "2024-09-09 11:02:46.749",
+      "dateFinished": "2024-09-09 11:02:50.739",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\nfrom pyspark.ml.feature import StringIndexer\n\nindexer \u003d StringIndexer(inputCols\u003d[\u0027UniqueCarrier\u0027,\u0027Origin\u0027, \u0027Dest\u0027], outputCols\u003d[\u0027CarrierIndex\u0027,\u0027OriginIndex\u0027, \u0027DestIndex\u0027])\ndf \u003d indexer.fit(df).transform(df)\n\nz.show(df)",
+      "user": "anonymous",
+      "dateUpdated": "2024-09-09 11:06:08.499",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "DayOfWeek": "string",
+                      "FlightNum": "string",
+                      "UniqueCarrier": "string",
+                      "Origin": "string",
+                      "Dest": "string",
+                      "Cancelled": "string",
+                      "CarrierIndex": "string",
+                      "OriginIndex": "string",
+                      "DestIndex": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "DayOfWeek\tFlightNum\tUniqueCarrier\tOrigin\tDest\tCancelled\tCarrierIndex\tOriginIndex\tDestIndex\n6\t942\tPI\tSYR\tBWI\t0\t4.0\t44.0\t24.0\n7\t942\tPI\tSYR\tBWI\t0\t4.0\t44.0\t24.0\n1\t942\tPI\tSYR\tBWI\t0\t4.0\t44.0\t24.0\n2\t942\tPI\tSYR\tBWI\t0\t4.0\t44.0\t24.0\n3\t942\tPI\tSYR\tBWI\t0\t4.0\t44.0\t24.0\n4\t942\tPI\tSYR\tBWI\t0\t4.0\t44.0\t24.0\n5\t942\tPI\tSYR\tBWI\t0\t4.0\t44.0\t24.0\n6\t942\tPI\tSYR\tBWI\t0\t4.0\t44.0\t24.0\n7\t942\tPI\tSYR\tBWI\t0\t4.0\t44.0\t24.0\n1\t942\tPI\tSYR\tBWI\t0\t4.0\t44.0\t24.0\n2\t942\tPI\tSYR\tBWI\t0\t4.0\t44.0\t24.0\n3\t942\tPI\tSYR\tBWI\t0\t4.0\t44.0\t24.0\n4\t942\tPI\tSYR\tBWI\t0\t4.0\t44.0\t24.0\n5\t942\tPI\tSYR\tBWI\t0\t4.0\t44.0\t24.0\n6\t942\tPI\tSYR\tBWI\t0\t4.0\t44.0\t24.0\n7\t942\tPI\tSYR\tBWI\t0\t4.0\t44.0\t24.0\n1\t942\tPI\tSYR\tBWI\t0\t4.0\t44.0\t24.0\n2\t942\tPI\tSYR\tBWI\t0\t4.0\t44.0\t24.0\n3\t942\tPI\tSYR\tBWI\t0\t4.0\t44.0\t24.0\n4\t942\tPI\tSYR\tBWI\t0\t4.0\t44.0\t24.0\n5\t942\tPI\tSYR\tBWI\t0\t4.0\t44.0\t24.0\n6\t942\tPI\tSYR\tBWI\t0\t4.0\t44.0\t24.0\n7\t942\tPI\tSYR\tBWI\t0\t4.0\t44.0\t24.0\n5\t943\tPI\tLGA\tSYR\t0\t4.0\t10.0\t44.0\n7\t943\tPI\tLGA\tSYR\t0\t4.0\t10.0\t44.0\n1\t943\tPI\tLGA\tSYR\t0\t4.0\t10.0\t44.0\n3\t943\tPI\tLGA\tSYR\t0\t4.0\t10.0\t44.0\n4\t943\tPI\tLGA\tSYR\t0\t4.0\t10.0\t44.0\n5\t943\tPI\tLGA\tSYR\t1\t4.0\t10.0\t44.0\n1\t943\tPI\tLGA\tSYR\t0\t4.0\t10.0\t44.0\n2\t943\tPI\tLGA\tSYR\t0\t4.0\t10.0\t44.0\n3\t943\tPI\tLGA\tSYR\t0\t4.0\t10.0\t44.0\n4\t943\tPI\tLGA\tSYR\t0\t4.0\t10.0\t44.0\n5\t943\tPI\tLGA\tSYR\t0\t4.0\t10.0\t44.0\n6\t943\tPI\tLGA\tSYR\t0\t4.0\t10.0\t44.0\n1\t943\tPI\tLGA\tSYR\t1\t4.0\t10.0\t44.0\n2\t943\tPI\tLGA\tSYR\t0\t4.0\t10.0\t44.0\n3\t943\tPI\tLGA\tSYR\t0\t4.0\t10.0\t44.0\n4\t943\tPI\tLGA\tSYR\t0\t4.0\t10.0\t44.0\n5\t943\tPI\tLGA\tSYR\t0\t4.0\t10.0\t44.0\n6\t943\tPI\tLGA\tSYR\t0\t4.0\t10.0\t44.0\n1\t943\tPI\tLGA\tSYR\t0\t4.0\t10.0\t44.0\n2\t943\tPI\tLGA\tSYR\t0\t4.0\t10.0\t44.0\n3\t943\tPI\tLGA\tSYR\t0\t4.0\t10.0\t44.0\n4\t943\tPI\tLGA\tSYR\t0\t4.0\t10.0\t44.0\n5\t943\tPI\tLGA\tSYR\t0\t4.0\t10.0\t44.0\n6\t943\tPI\tLGA\tSYR\t0\t4.0\t10.0\t44.0\n5\t943\tPI\tSYR\tBUF\t0\t4.0\t44.0\t50.0\n7\t943\tPI\tSYR\tBUF\t0\t4.0\t44.0\t50.0\n1\t943\tPI\tSYR\tBUF\t0\t4.0\t44.0\t50.0\n2\t943\tPI\tSYR\tBUF\t0\t4.0\t44.0\t50.0\n3\t943\tPI\tSYR\tBUF\t0\t4.0\t44.0\t50.0\n4\t943\tPI\tSYR\tBUF\t0\t4.0\t44.0\t50.0\n5\t943\tPI\tSYR\tBUF\t0\t4.0\t44.0\t50.0\n1\t943\tPI\tSYR\tBUF\t0\t4.0\t44.0\t50.0\n2\t943\tPI\tSYR\tBUF\t0\t4.0\t44.0\t50.0\n3\t943\tPI\tSYR\tBUF\t0\t4.0\t44.0\t50.0\n4\t943\tPI\tSYR\tBUF\t0\t4.0\t44.0\t50.0\n5\t943\tPI\tSYR\tBUF\t0\t4.0\t44.0\t50.0\n6\t943\tPI\tSYR\tBUF\t0\t4.0\t44.0\t50.0\n1\t943\tPI\tSYR\tBUF\t0\t4.0\t44.0\t50.0\n2\t943\tPI\tSYR\tBUF\t0\t4.0\t44.0\t50.0\n3\t943\tPI\tSYR\tBUF\t0\t4.0\t44.0\t50.0\n4\t943\tPI\tSYR\tBUF\t0\t4.0\t44.0\t50.0\n5\t943\tPI\tSYR\tBUF\t0\t4.0\t44.0\t50.0\n6\t943\tPI\tSYR\tBUF\t0\t4.0\t44.0\t50.0\n1\t943\tPI\tSYR\tBUF\t0\t4.0\t44.0\t50.0\n2\t943\tPI\tSYR\tBUF\t0\t4.0\t44.0\t50.0\n3\t943\tPI\tSYR\tBUF\t0\t4.0\t44.0\t50.0\n4\t943\tPI\tSYR\tBUF\t0\t4.0\t44.0\t50.0\n5\t943\tPI\tSYR\tBUF\t0\t4.0\t44.0\t50.0\n6\t943\tPI\tSYR\tBUF\t0\t4.0\t44.0\t50.0\n5\t944\tPI\tJFK\tUCA\t0\t4.0\t32.0\t205.0\n6\t944\tPI\tJFK\tUCA\t0\t4.0\t32.0\t205.0\n7\t944\tPI\tJFK\tUCA\t0\t4.0\t32.0\t205.0\n1\t944\tPI\tJFK\tUCA\t0\t4.0\t32.0\t205.0\n2\t944\tPI\tJFK\tUCA\t0\t4.0\t32.0\t205.0\n3\t944\tPI\tJFK\tUCA\t0\t4.0\t32.0\t205.0\n4\t944\tPI\tJFK\tUCA\t0\t4.0\t32.0\t205.0\n5\t944\tPI\tJFK\tUCA\t1\t4.0\t32.0\t205.0\n7\t944\tPI\tJFK\tUCA\t0\t4.0\t32.0\t205.0\n1\t944\tPI\tJFK\tUCA\t0\t4.0\t32.0\t205.0\n2\t944\tPI\tJFK\tUCA\t0\t4.0\t32.0\t205.0\n3\t944\tPI\tJFK\tUCA\t0\t4.0\t32.0\t205.0\n4\t944\tPI\tJFK\tUCA\t0\t4.0\t32.0\t205.0\n5\t944\tPI\tJFK\tUCA\t0\t4.0\t32.0\t205.0\n6\t944\tPI\tJFK\tUCA\t0\t4.0\t32.0\t205.0\n7\t944\tPI\tJFK\tUCA\t0\t4.0\t32.0\t205.0\n1\t944\tPI\tJFK\tUCA\t0\t4.0\t32.0\t205.0\n2\t944\tPI\tJFK\tUCA\t0\t4.0\t32.0\t205.0\n3\t944\tPI\tJFK\tUCA\t0\t4.0\t32.0\t205.0\n4\t944\tPI\tJFK\tUCA\t0\t4.0\t32.0\t205.0\n5\t944\tPI\tJFK\tUCA\t0\t4.0\t32.0\t205.0\n6\t944\tPI\tJFK\tUCA\t0\t4.0\t32.0\t205.0\n7\t944\tPI\tJFK\tUCA\t0\t4.0\t32.0\t205.0\n1\t944\tPI\tJFK\tUCA\t0\t4.0\t32.0\t205.0\n2\t944\tPI\tJFK\tUCA\t0\t4.0\t32.0\t205.0\n3\t944\tPI\tJFK\tUCA\t0\t4.0\t32.0\t205.0\n4\t944\tPI\tJFK\tUCA\t0\t4.0\t32.0\t205.0\n5\t944\tPI\tJFK\tUCA\t0\t4.0\t32.0\t205.0\n6\t944\tPI\tJFK\tUCA\t0\t4.0\t32.0\t205.0\n7\t944\tPI\tJFK\tUCA\t0\t4.0\t32.0\t205.0\n5\t944\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n7\t944\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n1\t944\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n2\t944\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n3\t944\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n4\t944\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n5\t944\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n6\t944\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n7\t944\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n1\t944\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n2\t944\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n3\t944\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n4\t944\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n5\t944\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n6\t944\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n7\t944\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n1\t944\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n2\t944\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n3\t944\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n4\t944\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n5\t944\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n6\t944\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n7\t944\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n1\t944\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n2\t944\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n3\t944\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n4\t944\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n5\t944\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n6\t944\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n7\t944\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n5\t944\tPI\tUCA\tSYR\t0\t4.0\t207.0\t44.0\n6\t944\tPI\tUCA\tSYR\t0\t4.0\t207.0\t44.0\n7\t944\tPI\tUCA\tSYR\t0\t4.0\t207.0\t44.0\n1\t944\tPI\tUCA\tSYR\t0\t4.0\t207.0\t44.0\n2\t944\tPI\tUCA\tSYR\t0\t4.0\t207.0\t44.0\n3\t944\tPI\tUCA\tSYR\t0\t4.0\t207.0\t44.0\n4\t944\tPI\tUCA\tSYR\t0\t4.0\t207.0\t44.0\n5\t944\tPI\tUCA\tSYR\t1\t4.0\t207.0\t44.0\n7\t944\tPI\tUCA\tSYR\t0\t4.0\t207.0\t44.0\n1\t944\tPI\tUCA\tSYR\t0\t4.0\t207.0\t44.0\n2\t944\tPI\tUCA\tSYR\t0\t4.0\t207.0\t44.0\n3\t944\tPI\tUCA\tSYR\t0\t4.0\t207.0\t44.0\n4\t944\tPI\tUCA\tSYR\t0\t4.0\t207.0\t44.0\n5\t944\tPI\tUCA\tSYR\t0\t4.0\t207.0\t44.0\n6\t944\tPI\tUCA\tSYR\t0\t4.0\t207.0\t44.0\n7\t944\tPI\tUCA\tSYR\t0\t4.0\t207.0\t44.0\n1\t944\tPI\tUCA\tSYR\t0\t4.0\t207.0\t44.0\n2\t944\tPI\tUCA\tSYR\t0\t4.0\t207.0\t44.0\n3\t944\tPI\tUCA\tSYR\t0\t4.0\t207.0\t44.0\n4\t944\tPI\tUCA\tSYR\t0\t4.0\t207.0\t44.0\n5\t944\tPI\tUCA\tSYR\t0\t4.0\t207.0\t44.0\n6\t944\tPI\tUCA\tSYR\t0\t4.0\t207.0\t44.0\n7\t944\tPI\tUCA\tSYR\t0\t4.0\t207.0\t44.0\n1\t944\tPI\tUCA\tSYR\t0\t4.0\t207.0\t44.0\n2\t944\tPI\tUCA\tSYR\t0\t4.0\t207.0\t44.0\n3\t944\tPI\tUCA\tSYR\t0\t4.0\t207.0\t44.0\n4\t944\tPI\tUCA\tSYR\t0\t4.0\t207.0\t44.0\n5\t944\tPI\tUCA\tSYR\t0\t4.0\t207.0\t44.0\n6\t944\tPI\tUCA\tSYR\t0\t4.0\t207.0\t44.0\n7\t944\tPI\tUCA\tSYR\t0\t4.0\t207.0\t44.0\n6\t945\tPI\tSYR\tDCA\t0\t4.0\t44.0\t15.0\n7\t945\tPI\tSYR\tDCA\t0\t4.0\t44.0\t15.0\n1\t945\tPI\tSYR\tDCA\t0\t4.0\t44.0\t15.0\n2\t945\tPI\tSYR\tDCA\t0\t4.0\t44.0\t15.0\n3\t945\tPI\tSYR\tDCA\t0\t4.0\t44.0\t15.0\n4\t945\tPI\tSYR\tDCA\t0\t4.0\t44.0\t15.0\n5\t945\tPI\tSYR\tDCA\t1\t4.0\t44.0\t15.0\n7\t945\tPI\tSYR\tDCA\t0\t4.0\t44.0\t15.0\n1\t945\tPI\tSYR\tDCA\t0\t4.0\t44.0\t15.0\n2\t945\tPI\tSYR\tDCA\t0\t4.0\t44.0\t15.0\n3\t945\tPI\tSYR\tDCA\t0\t4.0\t44.0\t15.0\n4\t945\tPI\tSYR\tDCA\t0\t4.0\t44.0\t15.0\n5\t945\tPI\tSYR\tDCA\t0\t4.0\t44.0\t15.0\n7\t945\tPI\tSYR\tDCA\t0\t4.0\t44.0\t15.0\n1\t945\tPI\tSYR\tDCA\t0\t4.0\t44.0\t15.0\n2\t945\tPI\tSYR\tDCA\t0\t4.0\t44.0\t15.0\n3\t945\tPI\tSYR\tDCA\t0\t4.0\t44.0\t15.0\n4\t945\tPI\tSYR\tDCA\t0\t4.0\t44.0\t15.0\n5\t945\tPI\tSYR\tDCA\t0\t4.0\t44.0\t15.0\n7\t945\tPI\tSYR\tDCA\t0\t4.0\t44.0\t15.0\n1\t945\tPI\tSYR\tDCA\t0\t4.0\t44.0\t15.0\n2\t945\tPI\tSYR\tDCA\t0\t4.0\t44.0\t15.0\n3\t945\tPI\tSYR\tDCA\t0\t4.0\t44.0\t15.0\n4\t945\tPI\tSYR\tDCA\t0\t4.0\t44.0\t15.0\n5\t945\tPI\tSYR\tDCA\t0\t4.0\t44.0\t15.0\n7\t945\tPI\tSYR\tDCA\t0\t4.0\t44.0\t15.0\n6\t948\tPI\tCHO\tLGA\t0\t4.0\t178.0\t10.0\n7\t948\tPI\tCHO\tLGA\t0\t4.0\t178.0\t10.0\n1\t948\tPI\tCHO\tLGA\t0\t4.0\t178.0\t10.0\n2\t948\tPI\tCHO\tLGA\t0\t4.0\t178.0\t10.0\n3\t948\tPI\tCHO\tLGA\t0\t4.0\t178.0\t10.0\n4\t948\tPI\tCHO\tLGA\t1\t4.0\t178.0\t10.0\n5\t948\tPI\tCHO\tLGA\t0\t4.0\t178.0\t10.0\n7\t948\tPI\tCHO\tLGA\t0\t4.0\t178.0\t10.0\n1\t948\tPI\tCHO\tLGA\t1\t4.0\t178.0\t10.0\n2\t948\tPI\tCHO\tLGA\t0\t4.0\t178.0\t10.0\n3\t948\tPI\tCHO\tLGA\t0\t4.0\t178.0\t10.0\n4\t948\tPI\tCHO\tLGA\t0\t4.0\t178.0\t10.0\n5\t948\tPI\tCHO\tLGA\t0\t4.0\t178.0\t10.0\n7\t948\tPI\tCHO\tLGA\t0\t4.0\t178.0\t10.0\n1\t948\tPI\tCHO\tLGA\t0\t4.0\t178.0\t10.0\n2\t948\tPI\tCHO\tLGA\t0\t4.0\t178.0\t10.0\n3\t948\tPI\tCHO\tLGA\t1\t4.0\t178.0\t10.0\n4\t948\tPI\tCHO\tLGA\t0\t4.0\t178.0\t10.0\n5\t948\tPI\tCHO\tLGA\t0\t4.0\t178.0\t10.0\n7\t948\tPI\tCHO\tLGA\t1\t4.0\t178.0\t10.0\n1\t948\tPI\tCHO\tLGA\t0\t4.0\t178.0\t10.0\n2\t948\tPI\tCHO\tLGA\t0\t4.0\t178.0\t10.0\n3\t948\tPI\tCHO\tLGA\t0\t4.0\t178.0\t10.0\n4\t948\tPI\tCHO\tLGA\t0\t4.0\t178.0\t10.0\n5\t948\tPI\tCHO\tLGA\t0\t4.0\t178.0\t10.0\n7\t948\tPI\tCHO\tLGA\t0\t4.0\t178.0\t10.0\n6\t948\tPI\tCLT\tLYH\t0\t4.0\t12.0\t186.0\n7\t948\tPI\tCLT\tLYH\t0\t4.0\t12.0\t186.0\n1\t948\tPI\tCLT\tLYH\t0\t4.0\t12.0\t186.0\n2\t948\tPI\tCLT\tLYH\t0\t4.0\t12.0\t186.0\n3\t948\tPI\tCLT\tLYH\t0\t4.0\t12.0\t186.0\n4\t948\tPI\tCLT\tLYH\t1\t4.0\t12.0\t186.0\n5\t948\tPI\tCLT\tLYH\t0\t4.0\t12.0\t186.0\n7\t948\tPI\tCLT\tLYH\t0\t4.0\t12.0\t186.0\n1\t948\tPI\tCLT\tLYH\t1\t4.0\t12.0\t186.0\n2\t948\tPI\tCLT\tLYH\t0\t4.0\t12.0\t186.0\n3\t948\tPI\tCLT\tLYH\t0\t4.0\t12.0\t186.0\n4\t948\tPI\tCLT\tLYH\t0\t4.0\t12.0\t186.0\n5\t948\tPI\tCLT\tLYH\t0\t4.0\t12.0\t186.0\n7\t948\tPI\tCLT\tLYH\t0\t4.0\t12.0\t186.0\n1\t948\tPI\tCLT\tLYH\t1\t4.0\t12.0\t186.0\n2\t948\tPI\tCLT\tLYH\t0\t4.0\t12.0\t186.0\n3\t948\tPI\tCLT\tLYH\t0\t4.0\t12.0\t186.0\n4\t948\tPI\tCLT\tLYH\t0\t4.0\t12.0\t186.0\n5\t948\tPI\tCLT\tLYH\t0\t4.0\t12.0\t186.0\n7\t948\tPI\tCLT\tLYH\t0\t4.0\t12.0\t186.0\n1\t948\tPI\tCLT\tLYH\t0\t4.0\t12.0\t186.0\n2\t948\tPI\tCLT\tLYH\t0\t4.0\t12.0\t186.0\n3\t948\tPI\tCLT\tLYH\t0\t4.0\t12.0\t186.0\n4\t948\tPI\tCLT\tLYH\t0\t4.0\t12.0\t186.0\n5\t948\tPI\tCLT\tLYH\t0\t4.0\t12.0\t186.0\n7\t948\tPI\tCLT\tLYH\t0\t4.0\t12.0\t186.0\n6\t948\tPI\tEWR\tROA\t0\t4.0\t7.0\t118.0\n7\t948\tPI\tEWR\tROA\t0\t4.0\t7.0\t118.0\n1\t948\tPI\tEWR\tROA\t0\t4.0\t7.0\t118.0\n2\t948\tPI\tEWR\tROA\t0\t4.0\t7.0\t118.0\n3\t948\tPI\tEWR\tROA\t0\t4.0\t7.0\t118.0\n4\t948\tPI\tEWR\tROA\t1\t4.0\t7.0\t118.0\n5\t948\tPI\tEWR\tROA\t1\t4.0\t7.0\t118.0\n7\t948\tPI\tEWR\tROA\t0\t4.0\t7.0\t118.0\n1\t948\tPI\tEWR\tROA\t1\t4.0\t7.0\t118.0\n2\t948\tPI\tEWR\tROA\t0\t4.0\t7.0\t118.0\n3\t948\tPI\tEWR\tROA\t1\t4.0\t7.0\t118.0\n4\t948\tPI\tEWR\tROA\t0\t4.0\t7.0\t118.0\n5\t948\tPI\tEWR\tROA\t0\t4.0\t7.0\t118.0\n7\t948\tPI\tEWR\tROA\t0\t4.0\t7.0\t118.0\n1\t948\tPI\tEWR\tROA\t0\t4.0\t7.0\t118.0\n2\t948\tPI\tEWR\tROA\t0\t4.0\t7.0\t118.0\n3\t948\tPI\tEWR\tROA\t1\t4.0\t7.0\t118.0\n4\t948\tPI\tEWR\tROA\t0\t4.0\t7.0\t118.0\n5\t948\tPI\tEWR\tROA\t0\t4.0\t7.0\t118.0\n7\t948\tPI\tEWR\tROA\t0\t4.0\t7.0\t118.0\n1\t948\tPI\tEWR\tROA\t0\t4.0\t7.0\t118.0\n2\t948\tPI\tEWR\tROA\t0\t4.0\t7.0\t118.0\n3\t948\tPI\tEWR\tROA\t0\t4.0\t7.0\t118.0\n4\t948\tPI\tEWR\tROA\t0\t4.0\t7.0\t118.0\n5\t948\tPI\tEWR\tROA\t0\t4.0\t7.0\t118.0\n7\t948\tPI\tEWR\tROA\t0\t4.0\t7.0\t118.0\n6\t948\tPI\tLYH\tCHO\t0\t4.0\t186.0\t179.0\n7\t948\tPI\tLYH\tCHO\t0\t4.0\t186.0\t179.0\n1\t948\tPI\tLYH\tCHO\t0\t4.0\t186.0\t179.0\n2\t948\tPI\tLYH\tCHO\t0\t4.0\t186.0\t179.0\n3\t948\tPI\tLYH\tCHO\t0\t4.0\t186.0\t179.0\n4\t948\tPI\tLYH\tCHO\t1\t4.0\t186.0\t179.0\n5\t948\tPI\tLYH\tCHO\t0\t4.0\t186.0\t179.0\n7\t948\tPI\tLYH\tCHO\t0\t4.0\t186.0\t179.0\n1\t948\tPI\tLYH\tCHO\t1\t4.0\t186.0\t179.0\n2\t948\tPI\tLYH\tCHO\t0\t4.0\t186.0\t179.0\n3\t948\tPI\tLYH\tCHO\t0\t4.0\t186.0\t179.0\n4\t948\tPI\tLYH\tCHO\t0\t4.0\t186.0\t179.0\n5\t948\tPI\tLYH\tCHO\t0\t4.0\t186.0\t179.0\n7\t948\tPI\tLYH\tCHO\t0\t4.0\t186.0\t179.0\n1\t948\tPI\tLYH\tCHO\t1\t4.0\t186.0\t179.0\n2\t948\tPI\tLYH\tCHO\t0\t4.0\t186.0\t179.0\n3\t948\tPI\tLYH\tCHO\t1\t4.0\t186.0\t179.0\n4\t948\tPI\tLYH\tCHO\t0\t4.0\t186.0\t179.0\n5\t948\tPI\tLYH\tCHO\t0\t4.0\t186.0\t179.0\n7\t948\tPI\tLYH\tCHO\t0\t4.0\t186.0\t179.0\n1\t948\tPI\tLYH\tCHO\t0\t4.0\t186.0\t179.0\n2\t948\tPI\tLYH\tCHO\t0\t4.0\t186.0\t179.0\n3\t948\tPI\tLYH\tCHO\t0\t4.0\t186.0\t179.0\n4\t948\tPI\tLYH\tCHO\t0\t4.0\t186.0\t179.0\n5\t948\tPI\tLYH\tCHO\t0\t4.0\t186.0\t179.0\n7\t948\tPI\tLYH\tCHO\t0\t4.0\t186.0\t179.0\n5\t948\tPI\tROA\tCLT\t0\t4.0\t120.0\t12.0\n6\t948\tPI\tROA\tCLT\t0\t4.0\t120.0\t12.0\n7\t948\tPI\tROA\tCLT\t0\t4.0\t120.0\t12.0\n1\t948\tPI\tROA\tCLT\t0\t4.0\t120.0\t12.0\n2\t948\tPI\tROA\tCLT\t0\t4.0\t120.0\t12.0\n3\t948\tPI\tROA\tCLT\t0\t4.0\t120.0\t12.0\n4\t948\tPI\tROA\tCLT\t1\t4.0\t120.0\t12.0\n5\t948\tPI\tROA\tCLT\t0\t4.0\t120.0\t12.0\n6\t948\tPI\tROA\tCLT\t0\t4.0\t120.0\t12.0\n7\t948\tPI\tROA\tCLT\t0\t4.0\t120.0\t12.0\n1\t948\tPI\tROA\tCLT\t1\t4.0\t120.0\t12.0\n2\t948\tPI\tROA\tCLT\t0\t4.0\t120.0\t12.0\n3\t948\tPI\tROA\tCLT\t0\t4.0\t120.0\t12.0\n4\t948\tPI\tROA\tCLT\t0\t4.0\t120.0\t12.0\n5\t948\tPI\tROA\tCLT\t0\t4.0\t120.0\t12.0\n6\t948\tPI\tROA\tCLT\t0\t4.0\t120.0\t12.0\n7\t948\tPI\tROA\tCLT\t0\t4.0\t120.0\t12.0\n1\t948\tPI\tROA\tCLT\t1\t4.0\t120.0\t12.0\n2\t948\tPI\tROA\tCLT\t0\t4.0\t120.0\t12.0\n3\t948\tPI\tROA\tCLT\t0\t4.0\t120.0\t12.0\n4\t948\tPI\tROA\tCLT\t0\t4.0\t120.0\t12.0\n5\t948\tPI\tROA\tCLT\t0\t4.0\t120.0\t12.0\n6\t948\tPI\tROA\tCLT\t0\t4.0\t120.0\t12.0\n7\t948\tPI\tROA\tCLT\t0\t4.0\t120.0\t12.0\n1\t948\tPI\tROA\tCLT\t0\t4.0\t120.0\t12.0\n2\t948\tPI\tROA\tCLT\t0\t4.0\t120.0\t12.0\n3\t948\tPI\tROA\tCLT\t0\t4.0\t120.0\t12.0\n4\t948\tPI\tROA\tCLT\t0\t4.0\t120.0\t12.0\n5\t948\tPI\tROA\tCLT\t0\t4.0\t120.0\t12.0\n6\t948\tPI\tROA\tCLT\t0\t4.0\t120.0\t12.0\n7\t948\tPI\tROA\tCLT\t0\t4.0\t120.0\t12.0\n5\t949\tPI\tEWR\tORF\t0\t4.0\t7.0\t52.0\n6\t949\tPI\tEWR\tORF\t0\t4.0\t7.0\t52.0\n6\t949\tPI\tEWR\tORF\t0\t4.0\t7.0\t52.0\n6\t949\tPI\tEWR\tORF\t0\t4.0\t7.0\t52.0\n6\t949\tPI\tEWR\tORF\t0\t4.0\t7.0\t52.0\n5\t950\tPI\tBWI\tBGM\t0\t4.0\t24.0\t172.0\n6\t950\tPI\tBWI\tBGM\t0\t4.0\t24.0\t172.0\n7\t950\tPI\tBWI\tBGM\t0\t4.0\t24.0\t172.0\n1\t950\tPI\tBWI\tBGM\t0\t4.0\t24.0\t172.0\n2\t950\tPI\tBWI\tBGM\t0\t4.0\t24.0\t172.0\n3\t950\tPI\tBWI\tBGM\t0\t4.0\t24.0\t172.0\n4\t950\tPI\tBWI\tBGM\t0\t4.0\t24.0\t172.0\n5\t950\tPI\tBWI\tBGM\t1\t4.0\t24.0\t172.0\n6\t950\tPI\tBWI\tBGM\t0\t4.0\t24.0\t172.0\n7\t950\tPI\tBWI\tBGM\t0\t4.0\t24.0\t172.0\n1\t950\tPI\tBWI\tBGM\t0\t4.0\t24.0\t172.0\n2\t950\tPI\tBWI\tBGM\t0\t4.0\t24.0\t172.0\n3\t950\tPI\tBWI\tBGM\t0\t4.0\t24.0\t172.0\n4\t950\tPI\tBWI\tBGM\t0\t4.0\t24.0\t172.0\n6\t950\tPI\tBWI\tBGM\t0\t4.0\t24.0\t172.0\n7\t950\tPI\tBWI\tBGM\t0\t4.0\t24.0\t172.0\n1\t950\tPI\tBWI\tBGM\t0\t4.0\t24.0\t172.0\n2\t950\tPI\tBWI\tBGM\t0\t4.0\t24.0\t172.0\n3\t950\tPI\tBWI\tBGM\t1\t4.0\t24.0\t172.0\n4\t950\tPI\tBWI\tBGM\t0\t4.0\t24.0\t172.0\n5\t950\tPI\tBWI\tBGM\t0\t4.0\t24.0\t172.0\n6\t950\tPI\tBWI\tBGM\t0\t4.0\t24.0\t172.0\n7\t950\tPI\tBWI\tBGM\t0\t4.0\t24.0\t172.0\n1\t950\tPI\tBWI\tBGM\t1\t4.0\t24.0\t172.0\n2\t950\tPI\tBWI\tBGM\t0\t4.0\t24.0\t172.0\n3\t950\tPI\tBWI\tBGM\t0\t4.0\t24.0\t172.0\n4\t950\tPI\tBWI\tBGM\t0\t4.0\t24.0\t172.0\n5\t950\tPI\tBWI\tBGM\t0\t4.0\t24.0\t172.0\n6\t950\tPI\tBWI\tBGM\t0\t4.0\t24.0\t172.0\n7\t950\tPI\tBWI\tBGM\t0\t4.0\t24.0\t172.0\n5\t950\tPI\tMYR\tBWI\t0\t4.0\t127.0\t24.0\n6\t950\tPI\tMYR\tBWI\t0\t4.0\t127.0\t24.0\n7\t950\tPI\tMYR\tBWI\t0\t4.0\t127.0\t24.0\n1\t950\tPI\tMYR\tBWI\t0\t4.0\t127.0\t24.0\n2\t950\tPI\tMYR\tBWI\t0\t4.0\t127.0\t24.0\n3\t950\tPI\tMYR\tBWI\t0\t4.0\t127.0\t24.0\n4\t950\tPI\tMYR\tBWI\t1\t4.0\t127.0\t24.0\n5\t950\tPI\tMYR\tBWI\t1\t4.0\t127.0\t24.0\n6\t950\tPI\tMYR\tBWI\t0\t4.0\t127.0\t24.0\n7\t950\tPI\tMYR\tBWI\t0\t4.0\t127.0\t24.0\n1\t950\tPI\tMYR\tBWI\t0\t4.0\t127.0\t24.0\n2\t950\tPI\tMYR\tBWI\t0\t4.0\t127.0\t24.0\n3\t950\tPI\tMYR\tBWI\t0\t4.0\t127.0\t24.0\n4\t950\tPI\tMYR\tBWI\t0\t4.0\t127.0\t24.0\n5\t950\tPI\tMYR\tBWI\t0\t4.0\t127.0\t24.0\n6\t950\tPI\tMYR\tBWI\t0\t4.0\t127.0\t24.0\n7\t950\tPI\tMYR\tBWI\t0\t4.0\t127.0\t24.0\n1\t950\tPI\tMYR\tBWI\t0\t4.0\t127.0\t24.0\n2\t950\tPI\tMYR\tBWI\t0\t4.0\t127.0\t24.0\n3\t950\tPI\tMYR\tBWI\t0\t4.0\t127.0\t24.0\n4\t950\tPI\tMYR\tBWI\t0\t4.0\t127.0\t24.0\n5\t950\tPI\tMYR\tBWI\t0\t4.0\t127.0\t24.0\n6\t950\tPI\tMYR\tBWI\t0\t4.0\t127.0\t24.0\n7\t950\tPI\tMYR\tBWI\t0\t4.0\t127.0\t24.0\n1\t950\tPI\tMYR\tBWI\t0\t4.0\t127.0\t24.0\n2\t950\tPI\tMYR\tBWI\t0\t4.0\t127.0\t24.0\n3\t950\tPI\tMYR\tBWI\t0\t4.0\t127.0\t24.0\n4\t950\tPI\tMYR\tBWI\t0\t4.0\t127.0\t24.0\n5\t950\tPI\tMYR\tBWI\t0\t4.0\t127.0\t24.0\n6\t950\tPI\tMYR\tBWI\t0\t4.0\t127.0\t24.0\n7\t950\tPI\tMYR\tBWI\t0\t4.0\t127.0\t24.0\n6\t951\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n7\t951\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n1\t951\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n2\t951\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n3\t951\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n4\t951\tPI\tLGA\tGSO\t1\t4.0\t10.0\t63.0\n5\t951\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n7\t951\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n1\t951\tPI\tLGA\tGSO\t1\t4.0\t10.0\t63.0\n2\t951\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n3\t951\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n4\t951\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n5\t951\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n7\t951\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n1\t951\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n2\t951\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n3\t951\tPI\tLGA\tGSO\t1\t4.0\t10.0\t63.0\n4\t951\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n5\t951\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n7\t951\tPI\tLGA\tGSO\t1\t4.0\t10.0\t63.0\n1\t951\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n2\t951\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n3\t951\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n4\t951\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n5\t951\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n7\t951\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n5\t953\tPI\tJFK\tBUF\t0\t4.0\t32.0\t50.0\n6\t953\tPI\tJFK\tBUF\t0\t4.0\t32.0\t50.0\n7\t953\tPI\tJFK\tBUF\t0\t4.0\t32.0\t50.0\n1\t953\tPI\tJFK\tBUF\t0\t4.0\t32.0\t50.0\n2\t953\tPI\tJFK\tBUF\t0\t4.0\t32.0\t50.0\n3\t953\tPI\tJFK\tBUF\t0\t4.0\t32.0\t50.0\n4\t953\tPI\tJFK\tBUF\t0\t4.0\t32.0\t50.0\n5\t953\tPI\tJFK\tBUF\t1\t4.0\t32.0\t50.0\n6\t953\tPI\tJFK\tBUF\t0\t4.0\t32.0\t50.0\n7\t953\tPI\tJFK\tBUF\t0\t4.0\t32.0\t50.0\n1\t953\tPI\tJFK\tBUF\t0\t4.0\t32.0\t50.0\n2\t953\tPI\tJFK\tBUF\t0\t4.0\t32.0\t50.0\n3\t953\tPI\tJFK\tBUF\t0\t4.0\t32.0\t50.0\n4\t953\tPI\tJFK\tBUF\t0\t4.0\t32.0\t50.0\n5\t953\tPI\tJFK\tBUF\t0\t4.0\t32.0\t50.0\n6\t953\tPI\tJFK\tBUF\t0\t4.0\t32.0\t50.0\n7\t953\tPI\tJFK\tBUF\t0\t4.0\t32.0\t50.0\n1\t953\tPI\tJFK\tBUF\t0\t4.0\t32.0\t50.0\n2\t953\tPI\tJFK\tBUF\t0\t4.0\t32.0\t50.0\n3\t953\tPI\tJFK\tBUF\t0\t4.0\t32.0\t50.0\n4\t953\tPI\tJFK\tBUF\t0\t4.0\t32.0\t50.0\n5\t953\tPI\tJFK\tBUF\t0\t4.0\t32.0\t50.0\n6\t953\tPI\tJFK\tBUF\t0\t4.0\t32.0\t50.0\n7\t953\tPI\tJFK\tBUF\t0\t4.0\t32.0\t50.0\n1\t953\tPI\tJFK\tBUF\t0\t4.0\t32.0\t50.0\n2\t953\tPI\tJFK\tBUF\t0\t4.0\t32.0\t50.0\n3\t953\tPI\tJFK\tBUF\t0\t4.0\t32.0\t50.0\n4\t953\tPI\tJFK\tBUF\t0\t4.0\t32.0\t50.0\n5\t953\tPI\tJFK\tBUF\t0\t4.0\t32.0\t50.0\n6\t953\tPI\tJFK\tBUF\t0\t4.0\t32.0\t50.0\n7\t953\tPI\tJFK\tBUF\t0\t4.0\t32.0\t50.0\n3\t954\tPI\tBWI\tJFK\t0\t4.0\t24.0\t32.0\n4\t954\tPI\tBWI\tJFK\t0\t4.0\t24.0\t32.0\n5\t954\tPI\tBWI\tJFK\t1\t4.0\t24.0\t32.0\n6\t954\tPI\tBWI\tJFK\t0\t4.0\t24.0\t32.0\n7\t954\tPI\tBWI\tJFK\t0\t4.0\t24.0\t32.0\n1\t954\tPI\tBWI\tJFK\t0\t4.0\t24.0\t32.0\n2\t954\tPI\tBWI\tJFK\t0\t4.0\t24.0\t32.0\n3\t954\tPI\tBWI\tJFK\t0\t4.0\t24.0\t32.0\n4\t954\tPI\tBWI\tJFK\t0\t4.0\t24.0\t32.0\n5\t954\tPI\tBWI\tJFK\t0\t4.0\t24.0\t32.0\n6\t954\tPI\tBWI\tJFK\t0\t4.0\t24.0\t32.0\n7\t954\tPI\tBWI\tJFK\t0\t4.0\t24.0\t32.0\n1\t954\tPI\tBWI\tJFK\t0\t4.0\t24.0\t32.0\n2\t954\tPI\tBWI\tJFK\t0\t4.0\t24.0\t32.0\n3\t954\tPI\tBWI\tJFK\t0\t4.0\t24.0\t32.0\n4\t954\tPI\tBWI\tJFK\t0\t4.0\t24.0\t32.0\n5\t954\tPI\tBWI\tJFK\t0\t4.0\t24.0\t32.0\n6\t954\tPI\tBWI\tJFK\t0\t4.0\t24.0\t32.0\n7\t954\tPI\tBWI\tJFK\t0\t4.0\t24.0\t32.0\n2\t954\tPI\tBWI\tJFK\t0\t4.0\t24.0\t32.0\n3\t954\tPI\tBWI\tJFK\t0\t4.0\t24.0\t32.0\n4\t954\tPI\tBWI\tJFK\t0\t4.0\t24.0\t32.0\n5\t954\tPI\tBWI\tJFK\t0\t4.0\t24.0\t32.0\n6\t954\tPI\tBWI\tJFK\t0\t4.0\t24.0\t32.0\n7\t954\tPI\tBWI\tJFK\t0\t4.0\t24.0\t32.0\n3\t954\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n4\t954\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n5\t954\tPI\tGSO\tBWI\t1\t4.0\t63.0\t24.0\n6\t954\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n7\t954\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n1\t954\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n2\t954\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n3\t954\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n4\t954\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n5\t954\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n6\t954\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n7\t954\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n1\t954\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n2\t954\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n3\t954\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n4\t954\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n5\t954\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n6\t954\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n7\t954\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n2\t954\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n3\t954\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n4\t954\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n5\t954\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n6\t954\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n7\t954\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n6\t955\tPI\tISP\tSYR\t0\t4.0\t98.0\t44.0\n7\t955\tPI\tISP\tSYR\t0\t4.0\t98.0\t44.0\n1\t955\tPI\tISP\tSYR\t0\t4.0\t98.0\t44.0\n2\t955\tPI\tISP\tSYR\t0\t4.0\t98.0\t44.0\n3\t955\tPI\tISP\tSYR\t0\t4.0\t98.0\t44.0\n4\t955\tPI\tISP\tSYR\t0\t4.0\t98.0\t44.0\n5\t955\tPI\tISP\tSYR\t0\t4.0\t98.0\t44.0\n7\t955\tPI\tISP\tSYR\t0\t4.0\t98.0\t44.0\n1\t955\tPI\tISP\tSYR\t0\t4.0\t98.0\t44.0\n2\t955\tPI\tISP\tSYR\t0\t4.0\t98.0\t44.0\n3\t955\tPI\tISP\tSYR\t0\t4.0\t98.0\t44.0\n4\t955\tPI\tISP\tSYR\t0\t4.0\t98.0\t44.0\n5\t955\tPI\tISP\tSYR\t0\t4.0\t98.0\t44.0\n7\t955\tPI\tISP\tSYR\t0\t4.0\t98.0\t44.0\n1\t955\tPI\tISP\tSYR\t1\t4.0\t98.0\t44.0\n2\t955\tPI\tISP\tSYR\t0\t4.0\t98.0\t44.0\n3\t955\tPI\tISP\tSYR\t1\t4.0\t98.0\t44.0\n4\t955\tPI\tISP\tSYR\t0\t4.0\t98.0\t44.0\n5\t955\tPI\tISP\tSYR\t0\t4.0\t98.0\t44.0\n7\t955\tPI\tISP\tSYR\t0\t4.0\t98.0\t44.0\n1\t955\tPI\tISP\tSYR\t0\t4.0\t98.0\t44.0\n2\t955\tPI\tISP\tSYR\t0\t4.0\t98.0\t44.0\n3\t955\tPI\tISP\tSYR\t0\t4.0\t98.0\t44.0\n4\t955\tPI\tISP\tSYR\t0\t4.0\t98.0\t44.0\n5\t955\tPI\tISP\tSYR\t0\t4.0\t98.0\t44.0\n7\t955\tPI\tISP\tSYR\t0\t4.0\t98.0\t44.0\n3\t955\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n4\t955\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n5\t955\tPI\tSYR\tBOS\t1\t4.0\t44.0\t13.0\n7\t955\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n1\t955\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n2\t955\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n3\t955\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n4\t955\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n5\t955\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n7\t955\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n1\t955\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n2\t955\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n3\t955\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n4\t955\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n5\t955\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n7\t955\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n1\t955\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n2\t955\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n3\t955\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n4\t955\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n5\t955\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n7\t955\tPI\tSYR\tBOS\t0\t4.0\t44.0\t13.0\n6\t955\tPI\tSYR\tBTV\t0\t4.0\t44.0\t101.0\n7\t955\tPI\tSYR\tBTV\t0\t4.0\t44.0\t101.0\n1\t955\tPI\tSYR\tBTV\t0\t4.0\t44.0\t101.0\n2\t955\tPI\tSYR\tBTV\t0\t4.0\t44.0\t101.0\n5\t957\tPI\tCLT\tLEX\t0\t4.0\t12.0\t94.0\n6\t957\tPI\tCLT\tLEX\t0\t4.0\t12.0\t94.0\n6\t957\tPI\tCLT\tLEX\t0\t4.0\t12.0\t94.0\n6\t957\tPI\tCLT\tLEX\t0\t4.0\t12.0\t94.0\n6\t957\tPI\tCLT\tLEX\t0\t4.0\t12.0\t94.0\n5\t959\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n6\t959\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n7\t959\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n1\t959\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n2\t959\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n3\t959\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n4\t959\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n5\t959\tPI\tLGA\tGSO\t1\t4.0\t10.0\t63.0\n6\t959\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n7\t959\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n1\t959\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n2\t959\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n3\t959\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n4\t959\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n5\t959\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n6\t959\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n7\t959\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n1\t959\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n2\t959\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n3\t959\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n4\t959\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n5\t959\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n6\t959\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n7\t959\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n2\t959\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n3\t959\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n4\t959\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n5\t959\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n6\t959\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n7\t959\tPI\tLGA\tGSO\t0\t4.0\t10.0\t63.0\n5\t960\tPI\tBWI\tBDL\t0\t4.0\t24.0\t46.0\n7\t960\tPI\tBWI\tBDL\t0\t4.0\t24.0\t46.0\n2\t960\tPI\tBWI\tBDL\t0\t4.0\t24.0\t46.0\n3\t960\tPI\tBWI\tBDL\t0\t4.0\t24.0\t46.0\n4\t960\tPI\tBWI\tBDL\t1\t4.0\t24.0\t46.0\n5\t960\tPI\tBWI\tBDL\t1\t4.0\t24.0\t46.0\n6\t960\tPI\tBWI\tBDL\t0\t4.0\t24.0\t46.0\n7\t960\tPI\tBWI\tBDL\t0\t4.0\t24.0\t46.0\n1\t960\tPI\tBWI\tBDL\t0\t4.0\t24.0\t46.0\n2\t960\tPI\tBWI\tBDL\t0\t4.0\t24.0\t46.0\n3\t960\tPI\tBWI\tBDL\t0\t4.0\t24.0\t46.0\n4\t960\tPI\tBWI\tBDL\t0\t4.0\t24.0\t46.0\n5\t960\tPI\tBWI\tBDL\t1\t4.0\t24.0\t46.0\n6\t960\tPI\tBWI\tBDL\t0\t4.0\t24.0\t46.0\n7\t960\tPI\tBWI\tBDL\t0\t4.0\t24.0\t46.0\n1\t960\tPI\tBWI\tBDL\t0\t4.0\t24.0\t46.0\n2\t960\tPI\tBWI\tBDL\t0\t4.0\t24.0\t46.0\n3\t960\tPI\tBWI\tBDL\t0\t4.0\t24.0\t46.0\n4\t960\tPI\tBWI\tBDL\t0\t4.0\t24.0\t46.0\n5\t960\tPI\tBWI\tBDL\t0\t4.0\t24.0\t46.0\n6\t960\tPI\tBWI\tBDL\t0\t4.0\t24.0\t46.0\n7\t960\tPI\tBWI\tBDL\t0\t4.0\t24.0\t46.0\n1\t960\tPI\tBWI\tBDL\t0\t4.0\t24.0\t46.0\n2\t960\tPI\tBWI\tBDL\t0\t4.0\t24.0\t46.0\n3\t960\tPI\tBWI\tBDL\t0\t4.0\t24.0\t46.0\n4\t960\tPI\tBWI\tBDL\t0\t4.0\t24.0\t46.0\n5\t960\tPI\tBWI\tBDL\t0\t4.0\t24.0\t46.0\n6\t960\tPI\tBWI\tBDL\t0\t4.0\t24.0\t46.0\n7\t960\tPI\tBWI\tBDL\t0\t4.0\t24.0\t46.0\n5\t960\tPI\tCHS\tORF\t0\t4.0\t74.0\t52.0\n7\t960\tPI\tCHS\tORF\t0\t4.0\t74.0\t52.0\n1\t960\tPI\tCHS\tORF\t0\t4.0\t74.0\t52.0\n2\t960\tPI\tCHS\tORF\t0\t4.0\t74.0\t52.0\n3\t960\tPI\tCHS\tORF\t0\t4.0\t74.0\t52.0\n4\t960\tPI\tCHS\tORF\t0\t4.0\t74.0\t52.0\n5\t960\tPI\tCHS\tORF\t0\t4.0\t74.0\t52.0\n6\t960\tPI\tCHS\tORF\t0\t4.0\t74.0\t52.0\n1\t960\tPI\tCHS\tORF\t0\t4.0\t74.0\t52.0\n2\t960\tPI\tCHS\tORF\t0\t4.0\t74.0\t52.0\n3\t960\tPI\tCHS\tORF\t0\t4.0\t74.0\t52.0\n4\t960\tPI\tCHS\tORF\t0\t4.0\t74.0\t52.0\n5\t960\tPI\tCHS\tORF\t1\t4.0\t74.0\t52.0\n6\t960\tPI\tCHS\tORF\t0\t4.0\t74.0\t52.0\n1\t960\tPI\tCHS\tORF\t0\t4.0\t74.0\t52.0\n2\t960\tPI\tCHS\tORF\t0\t4.0\t74.0\t52.0\n3\t960\tPI\tCHS\tORF\t0\t4.0\t74.0\t52.0\n4\t960\tPI\tCHS\tORF\t0\t4.0\t74.0\t52.0\n5\t960\tPI\tCHS\tORF\t0\t4.0\t74.0\t52.0\n6\t960\tPI\tCHS\tORF\t0\t4.0\t74.0\t52.0\n1\t960\tPI\tCHS\tORF\t0\t4.0\t74.0\t52.0\n2\t960\tPI\tCHS\tORF\t0\t4.0\t74.0\t52.0\n3\t960\tPI\tCHS\tORF\t0\t4.0\t74.0\t52.0\n4\t960\tPI\tCHS\tORF\t0\t4.0\t74.0\t52.0\n5\t960\tPI\tCHS\tORF\t0\t4.0\t74.0\t52.0\n6\t960\tPI\tCHS\tORF\t0\t4.0\t74.0\t52.0\n5\t960\tPI\tORF\tBWI\t0\t4.0\t52.0\t24.0\n6\t960\tPI\tORF\tBWI\t0\t4.0\t52.0\t24.0\n7\t960\tPI\tORF\tBWI\t0\t4.0\t52.0\t24.0\n2\t960\tPI\tORF\tBWI\t0\t4.0\t52.0\t24.0\n3\t960\tPI\tORF\tBWI\t0\t4.0\t52.0\t24.0\n4\t960\tPI\tORF\tBWI\t1\t4.0\t52.0\t24.0\n5\t960\tPI\tORF\tBWI\t0\t4.0\t52.0\t24.0\n6\t960\tPI\tORF\tBWI\t0\t4.0\t52.0\t24.0\n7\t960\tPI\tORF\tBWI\t0\t4.0\t52.0\t24.0\n1\t960\tPI\tORF\tBWI\t0\t4.0\t52.0\t24.0\n2\t960\tPI\tORF\tBWI\t0\t4.0\t52.0\t24.0\n3\t960\tPI\tORF\tBWI\t0\t4.0\t52.0\t24.0\n4\t960\tPI\tORF\tBWI\t0\t4.0\t52.0\t24.0\n5\t960\tPI\tORF\tBWI\t1\t4.0\t52.0\t24.0\n6\t960\tPI\tORF\tBWI\t0\t4.0\t52.0\t24.0\n7\t960\tPI\tORF\tBWI\t0\t4.0\t52.0\t24.0\n1\t960\tPI\tORF\tBWI\t0\t4.0\t52.0\t24.0\n2\t960\tPI\tORF\tBWI\t0\t4.0\t52.0\t24.0\n3\t960\tPI\tORF\tBWI\t0\t4.0\t52.0\t24.0\n4\t960\tPI\tORF\tBWI\t0\t4.0\t52.0\t24.0\n5\t960\tPI\tORF\tBWI\t0\t4.0\t52.0\t24.0\n6\t960\tPI\tORF\tBWI\t0\t4.0\t52.0\t24.0\n7\t960\tPI\tORF\tBWI\t0\t4.0\t52.0\t24.0\n1\t960\tPI\tORF\tBWI\t0\t4.0\t52.0\t24.0\n2\t960\tPI\tORF\tBWI\t0\t4.0\t52.0\t24.0\n3\t960\tPI\tORF\tBWI\t0\t4.0\t52.0\t24.0\n4\t960\tPI\tORF\tBWI\t0\t4.0\t52.0\t24.0\n5\t960\tPI\tORF\tBWI\t0\t4.0\t52.0\t24.0\n6\t960\tPI\tORF\tBWI\t0\t4.0\t52.0\t24.0\n7\t960\tPI\tORF\tBWI\t0\t4.0\t52.0\t24.0\n3\t961\tPI\tBGM\tBWI\t0\t4.0\t171.0\t24.0\n4\t961\tPI\tBGM\tBWI\t0\t4.0\t171.0\t24.0\n5\t961\tPI\tBGM\tBWI\t0\t4.0\t171.0\t24.0\n6\t961\tPI\tBGM\tBWI\t0\t4.0\t171.0\t24.0\n7\t961\tPI\tBGM\tBWI\t0\t4.0\t171.0\t24.0\n1\t961\tPI\tBGM\tBWI\t0\t4.0\t171.0\t24.0\n2\t961\tPI\tBGM\tBWI\t0\t4.0\t171.0\t24.0\n3\t961\tPI\tBGM\tBWI\t0\t4.0\t171.0\t24.0\n4\t961\tPI\tBGM\tBWI\t0\t4.0\t171.0\t24.0\n5\t961\tPI\tBGM\tBWI\t0\t4.0\t171.0\t24.0\n6\t961\tPI\tBGM\tBWI\t0\t4.0\t171.0\t24.0\n7\t961\tPI\tBGM\tBWI\t0\t4.0\t171.0\t24.0\n1\t961\tPI\tBGM\tBWI\t0\t4.0\t171.0\t24.0\n2\t961\tPI\tBGM\tBWI\t0\t4.0\t171.0\t24.0\n3\t961\tPI\tBGM\tBWI\t0\t4.0\t171.0\t24.0\n4\t961\tPI\tBGM\tBWI\t1\t4.0\t171.0\t24.0\n5\t961\tPI\tBGM\tBWI\t0\t4.0\t171.0\t24.0\n6\t961\tPI\tBGM\tBWI\t0\t4.0\t171.0\t24.0\n7\t961\tPI\tBGM\tBWI\t0\t4.0\t171.0\t24.0\n1\t961\tPI\tBGM\tBWI\t0\t4.0\t171.0\t24.0\n2\t961\tPI\tBGM\tBWI\t1\t4.0\t171.0\t24.0\n3\t961\tPI\tBGM\tBWI\t0\t4.0\t171.0\t24.0\n4\t961\tPI\tBGM\tBWI\t0\t4.0\t171.0\t24.0\n5\t961\tPI\tBGM\tBWI\t0\t4.0\t171.0\t24.0\n6\t961\tPI\tBGM\tBWI\t0\t4.0\t171.0\t24.0\n7\t961\tPI\tBGM\tBWI\t0\t4.0\t171.0\t24.0\n3\t961\tPI\tBWI\tRIC\t0\t4.0\t24.0\t69.0\n4\t961\tPI\tBWI\tRIC\t0\t4.0\t24.0\t69.0\n5\t961\tPI\tBWI\tRIC\t1\t4.0\t24.0\t69.0\n6\t961\tPI\tBWI\tRIC\t0\t4.0\t24.0\t69.0\n7\t961\tPI\tBWI\tRIC\t0\t4.0\t24.0\t69.0\n1\t961\tPI\tBWI\tRIC\t0\t4.0\t24.0\t69.0\n2\t961\tPI\tBWI\tRIC\t0\t4.0\t24.0\t69.0\n3\t961\tPI\tBWI\tRIC\t0\t4.0\t24.0\t69.0\n4\t961\tPI\tBWI\tRIC\t0\t4.0\t24.0\t69.0\n5\t961\tPI\tBWI\tRIC\t0\t4.0\t24.0\t69.0\n6\t961\tPI\tBWI\tRIC\t0\t4.0\t24.0\t69.0\n7\t961\tPI\tBWI\tRIC\t0\t4.0\t24.0\t69.0\n1\t961\tPI\tBWI\tRIC\t1\t4.0\t24.0\t69.0\n2\t961\tPI\tBWI\tRIC\t0\t4.0\t24.0\t69.0\n3\t961\tPI\tBWI\tRIC\t0\t4.0\t24.0\t69.0\n4\t961\tPI\tBWI\tRIC\t0\t4.0\t24.0\t69.0\n5\t961\tPI\tBWI\tRIC\t0\t4.0\t24.0\t69.0\n6\t961\tPI\tBWI\tRIC\t0\t4.0\t24.0\t69.0\n7\t961\tPI\tBWI\tRIC\t0\t4.0\t24.0\t69.0\n1\t961\tPI\tBWI\tRIC\t0\t4.0\t24.0\t69.0\n2\t961\tPI\tBWI\tRIC\t0\t4.0\t24.0\t69.0\n3\t961\tPI\tBWI\tRIC\t0\t4.0\t24.0\t69.0\n4\t961\tPI\tBWI\tRIC\t0\t4.0\t24.0\t69.0\n5\t961\tPI\tBWI\tRIC\t0\t4.0\t24.0\t69.0\n6\t961\tPI\tBWI\tRIC\t0\t4.0\t24.0\t69.0\n7\t961\tPI\tBWI\tRIC\t0\t4.0\t24.0\t69.0\n5\t962\tPI\tBWI\tSYR\t0\t4.0\t24.0\t44.0\n6\t962\tPI\tBWI\tSYR\t0\t4.0\t24.0\t44.0\n7\t962\tPI\tBWI\tSYR\t0\t4.0\t24.0\t44.0\n2\t962\tPI\tBWI\tSYR\t0\t4.0\t24.0\t44.0\n3\t962\tPI\tBWI\tSYR\t0\t4.0\t24.0\t44.0\n4\t962\tPI\tBWI\tSYR\t0\t4.0\t24.0\t44.0\n5\t962\tPI\tBWI\tSYR\t1\t4.0\t24.0\t44.0\n6\t962\tPI\tBWI\tSYR\t0\t4.0\t24.0\t44.0\n7\t962\tPI\tBWI\tSYR\t0\t4.0\t24.0\t44.0\n1\t962\tPI\tBWI\tSYR\t0\t4.0\t24.0\t44.0\n2\t962\tPI\tBWI\tSYR\t1\t4.0\t24.0\t44.0\n3\t962\tPI\tBWI\tSYR\t0\t4.0\t24.0\t44.0\n5\t962\tPI\tBWI\tSYR\t0\t4.0\t24.0\t44.0\n6\t962\tPI\tBWI\tSYR\t0\t4.0\t24.0\t44.0\n7\t962\tPI\tBWI\tSYR\t0\t4.0\t24.0\t44.0\n1\t962\tPI\tBWI\tSYR\t1\t4.0\t24.0\t44.0\n2\t962\tPI\tBWI\tSYR\t0\t4.0\t24.0\t44.0\n3\t962\tPI\tBWI\tSYR\t0\t4.0\t24.0\t44.0\n4\t962\tPI\tBWI\tSYR\t0\t4.0\t24.0\t44.0\n5\t962\tPI\tBWI\tSYR\t0\t4.0\t24.0\t44.0\n6\t962\tPI\tBWI\tSYR\t0\t4.0\t24.0\t44.0\n7\t962\tPI\tBWI\tSYR\t0\t4.0\t24.0\t44.0\n1\t962\tPI\tBWI\tSYR\t1\t4.0\t24.0\t44.0\n2\t962\tPI\tBWI\tSYR\t0\t4.0\t24.0\t44.0\n3\t962\tPI\tBWI\tSYR\t0\t4.0\t24.0\t44.0\n4\t962\tPI\tBWI\tSYR\t0\t4.0\t24.0\t44.0\n5\t962\tPI\tBWI\tSYR\t0\t4.0\t24.0\t44.0\n6\t962\tPI\tBWI\tSYR\t0\t4.0\t24.0\t44.0\n7\t962\tPI\tBWI\tSYR\t0\t4.0\t24.0\t44.0\n5\t962\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n6\t962\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n7\t962\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n2\t962\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n3\t962\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n4\t962\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n5\t962\tPI\tGSO\tBWI\t1\t4.0\t63.0\t24.0\n6\t962\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n7\t962\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n1\t962\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n2\t962\tPI\tGSO\tBWI\t1\t4.0\t63.0\t24.0\n3\t962\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n5\t962\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n6\t962\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n7\t962\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n2\t962\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n3\t962\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n4\t962\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n5\t962\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n6\t962\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n7\t962\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n1\t962\tPI\tGSO\tBWI\t1\t4.0\t63.0\t24.0\n2\t962\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n3\t962\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n4\t962\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n5\t962\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n6\t962\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n7\t962\tPI\tGSO\tBWI\t0\t4.0\t63.0\t24.0\n6\t970\tPI\tLGA\tSYR\t0\t4.0\t10.0\t44.0\n7\t970\tPI\tLGA\tSYR\t0\t4.0\t10.0\t44.0\n7\t970\tPI\tLGA\tSYR\t0\t4.0\t10.0\t44.0\n7\t970\tPI\tLGA\tSYR\t0\t4.0\t10.0\t44.0\n7\t970\tPI\tLGA\tSYR\t0\t4.0\t10.0\t44.0\n6\t970\tPI\tSYR\tELM\t0\t4.0\t44.0\t148.0\n7\t970\tPI\tSYR\tELM\t0\t4.0\t44.0\t148.0\n7\t970\tPI\tSYR\tELM\t0\t4.0\t44.0\t148.0\n7\t970\tPI\tSYR\tELM\t0\t4.0\t44.0\t148.0\n5\t1400\tPS\tLAX\tSAN\t0\t13.0\t3.0\t27.0\n6\t1400\tPS\tLAX\tSAN\t0\t13.0\t3.0\t27.0\n1\t1400\tPS\tLAX\tSAN\t0\t13.0\t3.0\t27.0\n2\t1400\tPS\tLAX\tSAN\t0\t13.0\t3.0\t27.0\n3\t1400\tPS\tLAX\tSAN\t1\t13.0\t3.0\t27.0\n5\t1400\tPS\tLAX\tSAN\t0\t13.0\t3.0\t27.0\n1\t1400\tPS\tLAX\tSAN\t0\t13.0\t3.0\t27.0\n2\t1400\tPS\tLAX\tSAN\t0\t13.0\t3.0\t27.0\n3\t1400\tPS\tLAX\tSAN\t0\t13.0\t3.0\t27.0\n4\t1400\tPS\tLAX\tSAN\t0\t13.0\t3.0\t27.0\n5\t1400\tPS\tLAX\tSAN\t0\t13.0\t3.0\t27.0\n1\t1400\tPS\tLAX\tSAN\t0\t13.0\t3.0\t27.0\n2\t1400\tPS\tLAX\tSAN\t0\t13.0\t3.0\t27.0\n5\t1400\tPS\tSEA\tLAX\t0\t13.0\t22.0\t3.0\n6\t1400\tPS\tSEA\tLAX\t0\t13.0\t22.0\t3.0\n1\t1400\tPS\tSEA\tLAX\t0\t13.0\t22.0\t3.0\n2\t1400\tPS\tSEA\tLAX\t0\t13.0\t22.0\t3.0\n3\t1400\tPS\tSEA\tLAX\t0\t13.0\t22.0\t3.0\n5\t1400\tPS\tSEA\tLAX\t0\t13.0\t22.0\t3.0\n1\t1400\tPS\tSEA\tLAX\t0\t13.0\t22.0\t3.0\n2\t1400\tPS\tSEA\tLAX\t0\t13.0\t22.0\t3.0\n3\t1400\tPS\tSEA\tLAX\t0\t13.0\t22.0\t3.0\n4\t1400\tPS\tSEA\tLAX\t0\t13.0\t22.0\t3.0\n5\t1400\tPS\tSEA\tLAX\t1\t13.0\t22.0\t3.0\n1\t1400\tPS\tSEA\tLAX\t0\t13.0\t22.0\t3.0\n5\t1404\tPS\tSJC\tLAX\t0\t13.0\t34.0\t3.0\n7\t1404\tPS\tSJC\tLAX\t0\t13.0\t34.0\t3.0\n1\t1404\tPS\tSJC\tLAX\t0\t13.0\t34.0\t3.0\n2\t1404\tPS\tSJC\tLAX\t0\t13.0\t34.0\t3.0\n3\t1404\tPS\tSJC\tLAX\t0\t13.0\t34.0\t3.0\n4\t1404\tPS\tSJC\tLAX\t0\t13.0\t34.0\t3.0\n5\t1404\tPS\tSJC\tLAX\t0\t13.0\t34.0\t3.0\n7\t1404\tPS\tSJC\tLAX\t0\t13.0\t34.0\t3.0\n1\t1404\tPS\tSJC\tLAX\t0\t13.0\t34.0\t3.0\n2\t1404\tPS\tSJC\tLAX\t0\t13.0\t34.0\t3.0\n3\t1404\tPS\tSJC\tLAX\t0\t13.0\t34.0\t3.0\n4\t1404\tPS\tSJC\tLAX\t0\t13.0\t34.0\t3.0\n5\t1404\tPS\tSJC\tLAX\t0\t13.0\t34.0\t3.0\n7\t1404\tPS\tSJC\tLAX\t0\t13.0\t34.0\t3.0\n1\t1404\tPS\tSJC\tLAX\t0\t13.0\t34.0\t3.0\n2\t1404\tPS\tSJC\tLAX\t0\t13.0\t34.0\t3.0\n6\t1405\tPS\tBUR\tSFO\t0\t13.0\t60.0\t6.0\n7\t1405\tPS\tBUR\tSFO\t0\t13.0\t60.0\t6.0\n1\t1405\tPS\tBUR\tSFO\t0\t13.0\t60.0\t6.0\n2\t1405\tPS\tBUR\tSFO\t0\t13.0\t60.0\t6.0\n3\t1405\tPS\tBUR\tSFO\t0\t13.0\t60.0\t6.0\n4\t1405\tPS\tBUR\tSFO\t0\t13.0\t60.0\t6.0\n5\t1405\tPS\tBUR\tSFO\t0\t13.0\t60.0\t6.0\n6\t1405\tPS\tBUR\tSFO\t0\t13.0\t60.0\t6.0\n7\t1405\tPS\tBUR\tSFO\t0\t13.0\t60.0\t6.0\n1\t1405\tPS\tBUR\tSFO\t0\t13.0\t60.0\t6.0\n2\t1405\tPS\tBUR\tSFO\t0\t13.0\t60.0\t6.0\n4\t1405\tPS\tBUR\tSFO\t0\t13.0\t60.0\t6.0\n5\t1405\tPS\tBUR\tSFO\t0\t13.0\t60.0\t6.0\n6\t1405\tPS\tBUR\tSFO\t0\t13.0\t60.0\t6.0\n7\t1405\tPS\tBUR\tSFO\t0\t13.0\t60.0\t6.0\n1\t1405\tPS\tBUR\tSFO\t0\t13.0\t60.0\t6.0\n2\t1405\tPS\tBUR\tSFO\t0\t13.0\t60.0\t6.0\n3\t1405\tPS\tBUR\tSFO\t0\t13.0\t60.0\t6.0\n4\t1405\tPS\tBUR\tSFO\t0\t13.0\t60.0\t6.0\n5\t1405\tPS\tBUR\tSFO\t0\t13.0\t60.0\t6.0\n6\t1405\tPS\tBUR\tSFO\t0\t13.0\t60.0\t6.0\n7\t1405\tPS\tBUR\tSFO\t0\t13.0\t60.0\t6.0\n1\t1405\tPS\tBUR\tSFO\t0\t13.0\t60.0\t6.0\n2\t1405\tPS\tBUR\tSFO\t0\t13.0\t60.0\t6.0\n3\t1405\tPS\tBUR\tSFO\t0\t13.0\t60.0\t6.0\n4\t1405\tPS\tBUR\tSFO\t0\t13.0\t60.0\t6.0\n5\t1405\tPS\tBUR\tSFO\t0\t13.0\t60.0\t6.0\n6\t1405\tPS\tBUR\tSFO\t0\t13.0\t60.0\t6.0\n7\t1405\tPS\tBUR\tSFO\t0\t13.0\t60.0\t6.0\n1\t1406\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n2\t1406\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n3\t1406\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n4\t1406\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n5\t1406\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n1\t1406\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n2\t1406\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n4\t1406\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n5\t1406\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n1\t1406\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n2\t1406\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n3\t1406\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n4\t1406\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n5\t1406\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n1\t1406\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n2\t1406\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n3\t1406\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n4\t1406\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n5\t1406\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n5\t1408\tPS\tSEA\tLAX\t0\t13.0\t22.0\t3.0\n7\t1408\tPS\tSEA\tLAX\t0\t13.0\t22.0\t3.0\n1\t1408\tPS\tSEA\tLAX\t0\t13.0\t22.0\t3.0\n2\t1408\tPS\tSEA\tLAX\t0\t13.0\t22.0\t3.0\n3\t1408\tPS\tSEA\tLAX\t0\t13.0\t22.0\t3.0\n4\t1408\tPS\tSEA\tLAX\t0\t13.0\t22.0\t3.0\n5\t1408\tPS\tSEA\tLAX\t0\t13.0\t22.0\t3.0\n7\t1408\tPS\tSEA\tLAX\t0\t13.0\t22.0\t3.0\n1\t1408\tPS\tSEA\tLAX\t0\t13.0\t22.0\t3.0\n3\t1408\tPS\tSEA\tLAX\t0\t13.0\t22.0\t3.0\n4\t1408\tPS\tSEA\tLAX\t0\t13.0\t22.0\t3.0\n5\t1408\tPS\tSEA\tLAX\t0\t13.0\t22.0\t3.0\n7\t1408\tPS\tSEA\tLAX\t0\t13.0\t22.0\t3.0\n1\t1408\tPS\tSEA\tLAX\t0\t13.0\t22.0\t3.0\n2\t1408\tPS\tSEA\tLAX\t0\t13.0\t22.0\t3.0\n5\t1410\tPS\tSJC\tLAX\t0\t13.0\t34.0\t3.0\n7\t1410\tPS\tSJC\tLAX\t0\t13.0\t34.0\t3.0\n1\t1410\tPS\tSJC\tLAX\t0\t13.0\t34.0\t3.0\n2\t1410\tPS\tSJC\tLAX\t0\t13.0\t34.0\t3.0\n3\t1410\tPS\tSJC\tLAX\t0\t13.0\t34.0\t3.0\n4\t1410\tPS\tSJC\tLAX\t0\t13.0\t34.0\t3.0\n5\t1410\tPS\tSJC\tLAX\t0\t13.0\t34.0\t3.0\n7\t1410\tPS\tSJC\tLAX\t0\t13.0\t34.0\t3.0\n1\t1410\tPS\tSJC\tLAX\t0\t13.0\t34.0\t3.0\n2\t1410\tPS\tSJC\tLAX\t0\t13.0\t34.0\t3.0\n3\t1410\tPS\tSJC\tLAX\t0\t13.0\t34.0\t3.0\n4\t1410\tPS\tSJC\tLAX\t0\t13.0\t34.0\t3.0\n7\t1410\tPS\tSJC\tLAX\t0\t13.0\t34.0\t3.0\n1\t1410\tPS\tSJC\tLAX\t0\t13.0\t34.0\t3.0\n2\t1410\tPS\tSJC\tLAX\t0\t13.0\t34.0\t3.0\n5\t1411\tPS\tLAX\tOAK\t0\t13.0\t3.0\t49.0\n6\t1411\tPS\tLAX\tOAK\t0\t13.0\t3.0\t49.0\n1\t1411\tPS\tLAX\tOAK\t0\t13.0\t3.0\t49.0\n2\t1411\tPS\tLAX\tOAK\t0\t13.0\t3.0\t49.0\n5\t1412\tPS\tBUR\tLAS\t0\t13.0\t60.0\t21.0\n6\t1412\tPS\tBUR\tLAS\t0\t13.0\t60.0\t21.0\n7\t1412\tPS\tBUR\tLAS\t0\t13.0\t60.0\t21.0\n1\t1412\tPS\tBUR\tLAS\t0\t13.0\t60.0\t21.0\n2\t1412\tPS\tBUR\tLAS\t0\t13.0\t60.0\t21.0\n3\t1412\tPS\tBUR\tLAS\t0\t13.0\t60.0\t21.0\n4\t1412\tPS\tBUR\tLAS\t0\t13.0\t60.0\t21.0\n5\t1412\tPS\tBUR\tLAS\t0\t13.0\t60.0\t21.0\n6\t1412\tPS\tBUR\tLAS\t0\t13.0\t60.0\t21.0\n7\t1412\tPS\tBUR\tLAS\t0\t13.0\t60.0\t21.0\n2\t1412\tPS\tBUR\tLAS\t0\t13.0\t60.0\t21.0\n3\t1412\tPS\tBUR\tLAS\t0\t13.0\t60.0\t21.0\n4\t1412\tPS\tBUR\tLAS\t0\t13.0\t60.0\t21.0\n5\t1412\tPS\tBUR\tLAS\t0\t13.0\t60.0\t21.0\n6\t1412\tPS\tBUR\tLAS\t0\t13.0\t60.0\t21.0\n7\t1412\tPS\tBUR\tLAS\t0\t13.0\t60.0\t21.0\n1\t1412\tPS\tBUR\tLAS\t0\t13.0\t60.0\t21.0\n2\t1412\tPS\tBUR\tLAS\t0\t13.0\t60.0\t21.0\n5\t1412\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n6\t1412\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n7\t1412\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n1\t1412\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n2\t1412\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n3\t1412\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n4\t1412\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n5\t1412\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n6\t1412\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n7\t1412\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n1\t1412\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n2\t1412\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n3\t1412\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n4\t1412\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n5\t1412\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n6\t1412\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n7\t1412\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n1\t1412\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n2\t1412\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n2\t1414\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n3\t1414\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n4\t1414\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n5\t1414\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n1\t1414\tPS\tSFO\tBUR\t1\t13.0\t5.0\t60.0\n2\t1414\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n3\t1414\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n4\t1414\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n1\t1414\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n2\t1414\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n3\t1414\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n4\t1414\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n5\t1414\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n1\t1414\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n2\t1414\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n3\t1414\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n4\t1414\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n5\t1414\tPS\tSFO\tBUR\t0\t13.0\t5.0\t60.0\n6\t1417\tPS\tLAX\tSJC\t0\t13.0\t3.0\t34.0\n7\t1417\tPS\tLAX\tSJC\t0\t13.0\t3.0\t34.0\n1\t1417\tPS\tLAX\tSJC\t0\t13.0\t3.0\t34.0\n3\t1417\tPS\tLAX\tSJC\t0\t13.0\t3.0\t34.0\n4\t1417\tPS\tLAX\tSJC\t0\t13.0\t3.0\t34.0\n5\t1417\tPS\tLAX\tSJC\t0\t13.0\t3.0\t34.0\n6\t1417\tPS\tLAX\tSJC\t0\t13.0\t3.0\t34.0\n7\t1417\tPS\tLAX\tSJC\t0\t13.0\t3.0\t34.0\n1\t1417\tPS\tLAX\tSJC\t0\t13.0\t3.0\t34.0\n2\t1417\tPS\tLAX\tSJC\t0\t13.0\t3.0\t34.0\n3\t1417\tPS\tLAX\tSJC\t0\t13.0\t3.0\t34.0\n4\t1417\tPS\tLAX\tSJC\t0\t13.0\t3.0\t34.0\n5\t1417\tPS\tLAX\tSJC\t0\t13.0\t3.0\t34.0\n7\t1417\tPS\tLAX\tSJC\t0\t13.0\t3.0\t34.0\n1\t1417\tPS\tLAX\tSJC\t0\t13.0\t3.0\t34.0\n2\t1417\tPS\tLAX\tSJC\t0\t13.0\t3.0\t34.0\n3\t1417\tPS\tLAX\tSJC\t0\t13.0\t3.0\t34.0\n4\t1417\tPS\tLAX\tSJC\t0\t13.0\t3.0\t34.0\n5\t1417\tPS\tLAX\tSJC\t0\t13.0\t3.0\t34.0\n7\t1417\tPS\tLAX\tSJC\t0\t13.0\t3.0\t34.0\n1\t1417\tPS\tLAX\tSJC\t0\t13.0\t3.0\t34.0\n2\t1417\tPS\tLAX\tSJC\t0\t13.0\t3.0\t34.0\n3\t1417\tPS\tLAX\tSJC\t0\t13.0\t3.0\t34.0\n4\t1417\tPS\tLAX\tSJC\t0\t13.0\t3.0\t34.0\n5\t1417\tPS\tLAX\tSJC\t0\t13.0\t3.0\t34.0\n6\t1417\tPS\tLAX\tSJC\t0\t13.0\t3.0\t34.0\n7\t1417\tPS\tLAX\tSJC\t0\t13.0\t3.0\t34.0\n7\t1418\tPS\tSFO\tLAX\t0\t13.0\t5.0\t3.0\n1\t1418\tPS\tSFO\tLAX\t0\t13.0\t5.0\t3.0\n2\t1418\tPS\tSFO\tLAX\t0\t13.0\t5.0\t3.0\n3\t1418\tPS\tSFO\tLAX\t0\t13.0\t5.0\t3.0\n4\t1418\tPS\tSFO\tLAX\t0\t13.0\t5.0\t3.0\n5\t1418\tPS\tSFO\tLAX\t0\t13.0\t5.0\t3.0\n7\t1418\tPS\tSFO\tLAX\t0\t13.0\t5.0\t3.0\n1\t1418\tPS\tSFO\tLAX\t0\t13.0\t5.0\t3.0\n2\t1418\tPS\tSFO\tLAX\t0\t13.0\t5.0\t3.0\n"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"result-alert alert-warning\" role\u003d\"alert\"\u003e\u003cbutton type\u003d\"button\" class\u003d\"close\" data-dismiss\u003d\"alert\" aria-label\u003d\"Close\"\u003e\u003cspan aria-hidden\u003d\"true\"\u003e\u0026times;\u003c/span\u003e\u003c/button\u003e\u003cstrong\u003eOutput is truncated\u003c/strong\u003e to 1000 rows. Learn more about \u003cstrong\u003ezeppelin.spark.maxResult\u003c/strong\u003e\u003c/div\u003e\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d33"
+            },
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d34"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1725847213085_810460967",
+      "id": "paragraph_1725847213085_810460967",
+      "dateCreated": "2024-09-09 11:00:13.085",
+      "dateStarted": "2024-09-09 11:06:05.141",
+      "dateFinished": "2024-09-09 11:06:08.284",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\nfrom pyspark.ml.feature import VectorAssembler\n\nfeature_names \u003d [\u0027DayOfWeek\u0027,\u0027FlightNum\u0027,\u0027CarrierIndex\u0027,\u0027OriginIndex\u0027,\u0027DestIndex\u0027]\n\nassembler \u003d VectorAssembler(inputCols\u003dfeature_names, outputCol\u003d\u0027feature\u0027)\ndf \u003d assembler.transform(df)",
+      "user": "anonymous",
+      "dateUpdated": "2024-09-09 11:09:17.472",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Fail to execute line 7: df \u003d assembler.transform(df)\nTraceback (most recent call last):\n  File \"/tmp/python3559887486415611416/zeppelin_python.py\", line 167, in \u003cmodule\u003e\n    exec(code, _zcUserQueryNameSpace)\n  File \"\u003cstdin\u003e\", line 7, in \u003cmodule\u003e\n  File \"/home/ubuntu/spark-3.1.2/python/pyspark/ml/base.py\", line 217, in transform\n    return self._transform(dataset)\n  File \"/home/ubuntu/spark-3.1.2/python/pyspark/ml/wrapper.py\", line 350, in _transform\n    return DataFrame(self._java_obj.transform(dataset._jdf), dataset.sql_ctx)\n  File \"/home/ubuntu/spark-3.1.2/python/lib/py4j-0.10.9-src.zip/py4j/java_gateway.py\", line 1304, in __call__\n    return_value \u003d get_return_value(\n  File \"/home/ubuntu/spark-3.1.2/python/pyspark/sql/utils.py\", line 117, in deco\n    raise converted from None\npyspark.sql.utils.IllegalArgumentException: Output column feature already exists.\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1725847407262_460872828",
+      "id": "paragraph_1725847407262_460872828",
+      "dateCreated": "2024-09-09 11:03:27.262",
+      "dateStarted": "2024-09-09 11:09:17.475",
+      "dateFinished": "2024-09-09 11:09:17.501",
+      "status": "ERROR"
+    },
+    {
+      "text": "%pyspark\ndf.show(10)",
+      "user": "anonymous",
+      "dateUpdated": "2024-09-09 11:09:58.962",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---------+---------+-------------+------+----+---------+------------+-----------+---------+--------------------+\n|DayOfWeek|FlightNum|UniqueCarrier|Origin|Dest|Cancelled|CarrierIndex|OriginIndex|DestIndex|             feature|\n+---------+---------+-------------+------+----+---------+------------+-----------+---------+--------------------+\n|        6|      942|           PI|   SYR| BWI|        0|         4.0|       44.0|     24.0|[6.0,942.0,4.0,44...|\n|        7|      942|           PI|   SYR| BWI|        0|         4.0|       44.0|     24.0|[7.0,942.0,4.0,44...|\n|        1|      942|           PI|   SYR| BWI|        0|         4.0|       44.0|     24.0|[1.0,942.0,4.0,44...|\n|        2|      942|           PI|   SYR| BWI|        0|         4.0|       44.0|     24.0|[2.0,942.0,4.0,44...|\n|        3|      942|           PI|   SYR| BWI|        0|         4.0|       44.0|     24.0|[3.0,942.0,4.0,44...|\n|        4|      942|           PI|   SYR| BWI|        0|         4.0|       44.0|     24.0|[4.0,942.0,4.0,44...|\n|        5|      942|           PI|   SYR| BWI|        0|         4.0|       44.0|     24.0|[5.0,942.0,4.0,44...|\n|        6|      942|           PI|   SYR| BWI|        0|         4.0|       44.0|     24.0|[6.0,942.0,4.0,44...|\n|        7|      942|           PI|   SYR| BWI|        0|         4.0|       44.0|     24.0|[7.0,942.0,4.0,44...|\n|        1|      942|           PI|   SYR| BWI|        0|         4.0|       44.0|     24.0|[1.0,942.0,4.0,44...|\n+---------+---------+-------------+------+----+---------+------------+-----------+---------+--------------------+\nonly showing top 10 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d35"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1725847407818_1197714318",
+      "id": "paragraph_1725847407818_1197714318",
+      "dateCreated": "2024-09-09 11:03:27.818",
+      "dateStarted": "2024-09-09 11:09:58.964",
+      "dateFinished": "2024-09-09 11:09:59.097",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\ntrain_data, test_data \u003d df.randomSplit([0.8,0.2])",
+      "user": "anonymous",
+      "dateUpdated": "2024-09-09 11:12:35.830",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1725847938118_664124956",
+      "id": "paragraph_1725847938118_664124956",
+      "dateCreated": "2024-09-09 11:12:18.118",
+      "dateStarted": "2024-09-09 11:12:35.832",
+      "dateFinished": "2024-09-09 11:12:35.850",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\nfrom pyspark.ml.classification import LogisticRegression\n\nlr \u003d LogisticRegression(featuresCol\u003d\u0027feature\u0027, labelCol\u003d\u0027Cancelled\u0027)\nlr_model \u003d lr.fit(train_data)",
+      "user": "anonymous",
+      "dateUpdated": "2024-09-09 11:13:02.740",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d36"
+            },
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d37"
+            },
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d38"
+            },
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d39"
+            },
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d40"
+            },
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d41"
+            },
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d42"
+            },
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d43"
+            },
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d44"
+            },
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d45"
+            },
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d46"
+            },
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d47"
+            },
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d48"
+            },
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d49"
+            },
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d50"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1725847408418_425132827",
+      "id": "paragraph_1725847408418_425132827",
+      "dateCreated": "2024-09-09 11:03:28.418",
+      "dateStarted": "2024-09-09 11:13:02.747",
+      "dateFinished": "2024-09-09 11:13:25.260",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\nprediction \u003d lr_model.transform(test_data)\nprediction.show()     ",
+      "user": "anonymous",
+      "dateUpdated": "2024-09-09 11:15:03.042",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---------+---------+-------------+------+----+---------+------------+-----------+---------+--------------------+--------------------+--------------------+----------+\n|DayOfWeek|FlightNum|UniqueCarrier|Origin|Dest|Cancelled|CarrierIndex|OriginIndex|DestIndex|             feature|       rawPrediction|         probability|prediction|\n+---------+---------+-------------+------+----+---------+------------+-----------+---------+--------------------+--------------------+--------------------+----------+\n|        1|        1|           AA|   LAX| HNL|        0|         1.0|        3.0|     72.0|[1.0,1.0,1.0,3.0,...|[4.51069118634045...|[0.98912862495307...|       0.0|\n|        1|        1|           AA|   LAX| HNL|        0|         1.0|        3.0|     72.0|[1.0,1.0,1.0,3.0,...|[4.51069118634045...|[0.98912862495307...|       0.0|\n|        1|        1|           EA|   LGA| MCI|        0|         7.0|       10.0|     35.0|[1.0,1.0,7.0,10.0...|[4.39675280503697...|[0.98783259758314...|       0.0|\n|        1|        1|           EA|   MCI| LAS|        0|         7.0|       35.0|     21.0|[1.0,1.0,7.0,35.0...|[4.37315009170937...|[0.98754561713184...|       0.0|\n|        1|        1|           HP|   ORD| PHX|        0|        10.0|        0.0|      8.0|[1.0,1.0,10.0,0.0...|[4.36126394973301...|[0.98739857586966...|       0.0|\n|        1|        1|           HP|   ORD| PHX|        0|        10.0|        0.0|      8.0|[1.0,1.0,10.0,0.0...|[4.36126394973301...|[0.98739857586966...|       0.0|\n|        1|        1|           HP|   ORD| PHX|        0|        10.0|        0.0|      8.0|[1.0,1.0,10.0,0.0...|[4.36126394973301...|[0.98739857586966...|       0.0|\n|        1|        1|           HP|   PHX| TUS|        0|        10.0|        8.0|     67.0|[1.0,1.0,10.0,8.0...|[4.31918495711090...|[0.98686412018574...|       0.0|\n|        1|        1|           TW|   STL| HNL|        0|         8.0|        6.0|     72.0|[1.0,1.0,8.0,6.0,...|[4.36073671378851...|[0.98739201398273...|       0.0|\n|        1|        1|           UA|   ORD| HNL|        0|         2.0|        0.0|     72.0|[1.0,1.0,2.0,0.0,...|[4.49355033078667...|[0.98894275228551...|       0.0|\n|        1|        1|           UA|   ORD| HNL|        0|         2.0|        0.0|     72.0|[1.0,1.0,2.0,0.0,...|[4.49355033078667...|[0.98894275228551...|       0.0|\n|        1|        1|           UA|   ORD| HNL|        0|         2.0|        0.0|     72.0|[1.0,1.0,2.0,0.0,...|[4.49355033078667...|[0.98894275228551...|       0.0|\n|        1|        1|           US|   PIT| DEN|        0|         3.0|        9.0|      4.0|[1.0,1.0,3.0,9.0,...|[4.49840973963799...|[0.98899576379014...|       0.0|\n|        1|        1|           WN|   DAL| HOU|        0|         9.0|       40.0|     30.0|[1.0,1.0,9.0,40.0...|[4.32023781740469...|[0.98687776176563...|       0.0|\n|        1|        2|           AA|   HNL| LAX|        0|         1.0|       72.0|      3.0|[1.0,2.0,1.0,72.0...|[4.46207664928949...|[0.98859323829164...|       0.0|\n|        1|        2|           AA|   HNL| LAX|        0|         1.0|       72.0|      3.0|[1.0,2.0,1.0,72.0...|[4.46207664928949...|[0.98859323829164...|       0.0|\n|        1|        2|           CO|   HNL| LAX|        0|         5.0|       72.0|      3.0|[1.0,2.0,5.0,72.0...|[4.37852898523662...|[0.98761160040485...|       0.0|\n|        1|        2|           EA|   MCI| LGA|        0|         7.0|       35.0|     10.0|[1.0,2.0,7.0,35.0...|[4.37914933695933...|[0.98761918806755...|       0.0|\n|        1|        2|           EA|   MCI| LGA|        0|         7.0|       35.0|     10.0|[1.0,2.0,7.0,35.0...|[4.37914933695933...|[0.98761918806755...|       0.0|\n|        1|        2|           HP|   PHX| ORD|        0|        10.0|        8.0|      0.0|[1.0,2.0,10.0,8.0...|[4.35564203103143...|[0.98732843240885...|       0.0|\n+---------+---------+-------------+------+----+---------+------------+-----------+---------+--------------------+--------------------+--------------------+----------+\nonly showing top 20 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d51"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1725847408947_1210620520",
+      "id": "paragraph_1725847408947_1210620520",
+      "dateCreated": "2024-09-09 11:03:28.947",
+      "dateStarted": "2024-09-09 11:15:03.045",
+      "dateFinished": "2024-09-09 11:15:06.193",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\n\n# 모델 평가 - *BinaryClassificationEvaluator\nfrom pyspark.ml.evaluation import BinaryClassificationEvaluator\n\nevaluator \u003d BinaryClassificationEvaluator(labelCol\u003d\u0027Cancelled\u0027, rawPredictionCol\u003d\u0027rawPrediction\u0027, metricName\u003d\u0027areaUnderROC\u0027)\nresult \u003d evaluator.evaluate(prediction)\nprint(result)",
+      "user": "anonymous",
+      "dateUpdated": "2024-09-09 11:20:54.501",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "0.549065675375852\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d52"
+            },
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d53"
+            },
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d54"
+            },
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d55"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1725847409442_675259076",
+      "id": "paragraph_1725847409442_675259076",
+      "dateCreated": "2024-09-09 11:03:29.442",
+      "dateStarted": "2024-09-09 11:20:54.503",
+      "dateFinished": "2024-09-09 11:21:04.670",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n## 랜덤포레스트",
+      "user": "anonymous",
+      "dateUpdated": "2024-09-09 11:43:19.464",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003e랜덤포레스트\u003c/h2\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1725848114819_1721109444",
+      "id": "paragraph_1725848114819_1721109444",
+      "dateCreated": "2024-09-09 11:15:14.819",
+      "dateStarted": "2024-09-09 11:43:19.465",
+      "dateFinished": "2024-09-09 11:43:19.489",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\nfrom pyspark.ml.classification import RandomForestClassifier\n\nrf \u003d RandomForestClassifier(featuresCol\u003d\u0027feature\u0027, labelCol\u003d\u0027Cancelled\u0027, maxBins\u003d250)\nrF_model \u003d rf.fit(train_data)",
+      "user": "anonymous",
+      "dateUpdated": "2024-09-09 11:48:14.869",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d59"
+            },
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d60"
+            },
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d61"
+            },
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d62"
+            },
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d63"
+            },
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d64"
+            },
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d65"
+            },
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d66"
+            },
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d67"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1725848115420_14273280",
+      "id": "paragraph_1725848115420_14273280",
+      "dateCreated": "2024-09-09 11:15:15.420",
+      "dateStarted": "2024-09-09 11:48:14.872",
+      "dateFinished": "2024-09-09 11:49:23.570",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\nprediction \u003d rF_model.transform(test_data)",
+      "user": "anonymous",
+      "dateUpdated": "2024-09-09 11:49:49.786",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1725848115995_2068825327",
+      "id": "paragraph_1725848115995_2068825327",
+      "dateCreated": "2024-09-09 11:15:15.995",
+      "dateStarted": "2024-09-09 11:49:49.790",
+      "dateFinished": "2024-09-09 11:49:49.827",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\nevaluator \u003d BinaryClassificationEvaluator(labelCol\u003d\u0027Cancelled\u0027, rawPredictionCol\u003d\u0027rawPrediction\u0027, metricName\u003d\u0027areaUnderROC\u0027)\nresult \u003d evaluator.evaluate(prediction)\nprint(result)",
+      "user": "anonymous",
+      "dateUpdated": "2024-09-09 11:49:53.295",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "0.5\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d68"
+            },
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d69"
+            },
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d70"
+            },
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d71"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1725849802820_309413148",
+      "id": "paragraph_1725849802820_309413148",
+      "dateCreated": "2024-09-09 11:43:22.820",
+      "dateStarted": "2024-09-09 11:49:53.298",
+      "dateFinished": "2024-09-09 11:50:01.461",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\n",
+      "user": "anonymous",
+      "dateUpdated": "2024-09-09 11:43:23.388",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1725849803387_610960934",
+      "id": "paragraph_1725849803387_610960934",
+      "dateCreated": "2024-09-09 11:43:23.388",
+      "status": "READY"
+    }
+  ],
+  "name": "classification",
+  "id": "2K9WC71RV",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}
