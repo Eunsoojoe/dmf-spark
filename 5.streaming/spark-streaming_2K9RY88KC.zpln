@@ -1,0 +1,424 @@
+{
+  "paragraphs": [
+    {
+      "text": "%pyspark\n# 현재 시간 추가를 위한 라이브러리\nfrom pyspark.sql.functions import current_timestamp\n\nlines \u003d spark.readStream.format(\u0027socket\u0027)\\\n    .option(\u0027host\u0027,\u0027localhost\u0027)\\\n    .option(\u0027port\u0027,\u00272222\u0027)\\\n    .load()\n    \nlines_with_time \u003d lines.select(\n    lines.value,\n    current_timestamp()\n)\n\nquery \u003d lines_with_time.writeStream\\\n    .trigger(processingTime\u003d\u00271 minute\u0027)\\\n    .outputMode(\u0027append\u0027)\\\n    .format(\u0027csv\u0027)\\\n    .option(\u0027path\u0027, \u0027hdfs://localhost:9000/user/ubuntu/output/streaming-test\u0027)\\\n    .option(\u0027checkPointLocation\u0027, \u0027hdfs://localhost:9000/user/ubuntu/output/streaming-test-check\u0027)\\\n    .start()\n    \nquery.awaitTermination()    # 셀 단위 프로그래밍인 zeppelin이라서, 종료가 되지 않고 반복 작업을 하도록 하기 위한!\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2024-09-10 13:35:07.644",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Fail to execute line 8:     .load()\nTraceback (most recent call last):\n  File \"/tmp/python4840042684939845152/zeppelin_python.py\", line 162, in \u003cmodule\u003e\n    exec(code, _zcUserQueryNameSpace)\n  File \"\u003cstdin\u003e\", line 8, in \u003cmodule\u003e\n  File \"/home/ubuntu/spark-3.1.2/python/pyspark/sql/streaming.py\", line 482, in load\n    return self._df(self._jreader.load())\n  File \"/home/ubuntu/spark-3.1.2/python/lib/py4j-0.10.9-src.zip/py4j/java_gateway.py\", line 1303, in __call__\n    answer \u003d self.gateway_client.send_command(command)\n  File \"/home/ubuntu/spark-3.1.2/python/lib/py4j-0.10.9-src.zip/py4j/java_gateway.py\", line 1033, in send_command\n    response \u003d connection.send_command(command)\n  File \"/home/ubuntu/spark-3.1.2/python/lib/py4j-0.10.9-src.zip/py4j/java_gateway.py\", line 1200, in send_command\n    answer \u003d smart_decode(self.stream.readline()[:-1])\n  File \"/usr/lib/python3.10/socket.py\", line 705, in readinto\n    return self._sock.recv_into(b)\n  File \"/home/ubuntu/spark-3.1.2/python/pyspark/context.py\", line 285, in signal_handler\n    raise KeyboardInterrupt()\nKeyboardInterrupt\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1725929301924_1715535902",
+      "id": "paragraph_1725929301924_1715535902",
+      "dateCreated": "2024-09-10 09:48:21.924",
+      "dateStarted": "2024-09-10 13:35:07.674",
+      "dateFinished": "2024-09-10 13:35:36.255",
+      "status": "ABORT"
+    },
+    {
+      "text": "%md\n## streaming with kafka",
+      "user": "anonymous",
+      "dateUpdated": "2024-09-10 11:45:32.699",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003estreaming with kafka\u003c/h2\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1725929944786_1030910075",
+      "id": "paragraph_1725929944786_1030910075",
+      "dateCreated": "2024-09-10 09:59:04.786",
+      "dateStarted": "2024-09-10 11:45:32.699",
+      "dateFinished": "2024-09-10 11:45:34.834",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\nfrom pyspark.sql.functions import split, col\n\n# spark와 kafka를 연결\n# 구독하고자 하는 topic 지정\ndf_stream_kafka \u003d spark.readStream\\\n    .format(\u0027kafka\u0027)\\\n    .option(\u0027kafka.bootstrap.servers\u0027, \u0027localhost:9092\u0027)\\\n    .option(\u0027subscribe\u0027, \u0027upbit-api\u0027)\\\n    .option(\u0027startingOffsets\u0027,\u0027latest\u0027)\\\n    .load()\n  \nprint(df_stream_kafka)  \n\n# 코드를 돌리는 순간부터 새롭게 쌓이는 데이터 저장\n# 많은 데이터 중 value만 추출\ndf_stream_value \u003d df_stream_kafka.withColumn(\u0027value\u0027, df_stream_kafka[\u0027value\u0027].cast(\u0027string\u0027)).select(\u0027value\u0027)\ndf_parsed \u003d df_stream_value.select(\n    split(col(\u0027value\u0027), \u0027,\u0027)[0].alias(\u0027market\u0027),\n    split(col(\u0027value\u0027), \u0027,\u0027)[1].alias(\u0027trade_date\u0027),\n    split(col(\u0027value\u0027), \u0027,\u0027)[2].alias(\u0027trade_time\u0027),\n    split(col(\u0027value\u0027), \u0027,\u0027)[3].alias(\u0027trade_price\u0027),\n)\n\n# hardoop에 저장\nquery \u003d df_parsed.writeStream\\\n            .trigger(processingTime\u003d\u002710 seconds\u0027)\\\n            .outputMode(\u0027append\u0027)\\\n            .format(\u0027csv\u0027)\\\n            .option(\u0027path\u0027,\u0027hdfs://localhost:9000/user/ubuntu/output/upbit-csv\u0027)\\\n            .option(\u0027checkpointLocation\u0027,\u0027hdfs://localhost:9000/user/ubuntu/output/upbit-csv-check\u0027)\\\n            .option(\u0027header\u0027,\u0027true\u0027)\\\n            .start()\n            \nquery.awaitTermination()\n",
+      "user": "anonymous",
+      "dateUpdated": "2024-09-10 13:35:23.313",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "DataFrame[key: binary, value: binary, topic: string, partition: int, offset: bigint, timestamp: timestamp, timestampType: int]\n"
+          },
+          {
+            "type": "TEXT",
+            "data": "Fail to execute line 35: query.awaitTermination()\nTraceback (most recent call last):\n  File \"/tmp/python4840042684939845152/zeppelin_python.py\", line 167, in \u003cmodule\u003e\n    exec(code, _zcUserQueryNameSpace)\n  File \"\u003cstdin\u003e\", line 35, in \u003cmodule\u003e\n  File \"/home/ubuntu/spark-3.1.2/python/pyspark/sql/streaming.py\", line 101, in awaitTermination\n    return self._jsq.awaitTermination()\n  File \"/home/ubuntu/spark-3.1.2/python/lib/py4j-0.10.9-src.zip/py4j/java_gateway.py\", line 1303, in __call__\n    answer \u003d self.gateway_client.send_command(command)\n  File \"/home/ubuntu/spark-3.1.2/python/lib/py4j-0.10.9-src.zip/py4j/java_gateway.py\", line 1033, in send_command\n    response \u003d connection.send_command(command)\n  File \"/home/ubuntu/spark-3.1.2/python/lib/py4j-0.10.9-src.zip/py4j/java_gateway.py\", line 1200, in send_command\n    answer \u003d smart_decode(self.stream.readline()[:-1])\n  File \"/usr/lib/python3.10/socket.py\", line 705, in readinto\n    return self._sock.recv_into(b)\n  File \"/home/ubuntu/spark-3.1.2/python/pyspark/context.py\", line 285, in signal_handler\n    raise KeyboardInterrupt()\nKeyboardInterrupt\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1725932040335_296770513",
+      "id": "paragraph_1725932040335_296770513",
+      "dateCreated": "2024-09-10 10:34:00.335",
+      "dateStarted": "2024-09-10 13:35:34.428",
+      "dateFinished": "2024-09-10 13:46:34.153",
+      "status": "ABORT"
+    },
+    {
+      "text": "%pyspark\ndf \u003d spark.read.csv(\u0027hdfs://localhost:9000/user/ubuntu/output/upbit-csv\u0027, header\u003dTrue, inferSchema\u003dTrue)\n\nz.show(df)",
+      "user": "anonymous",
+      "dateUpdated": "2024-09-10 13:46:36.617",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "market": "string",
+                      "trade_date": "string",
+                      "trade_time": "string",
+                      "trade_price": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "market\ttrade_date\ttrade_time\ttrade_price\nKRW-BTC\t20240910\t43559\t7.6575E7\nKRW-BTC\t20240910\t43600\t7.6586E7\nKRW-BTC\t20240910\t43603\t7.6584E7\nKRW-BTC\t20240910\t43606\t7.6574E7\nKRW-BTC\t20240910\t43606\t7.6574E7\nKRW-BTC\t20240910\t43609\t7.6548E7\nKRW-BTC\t20240910\t43611\t7.6557E7\nKRW-BTC\t20240910\t43611\t7.6557E7\nKRW-BTC\t20240910\t43615\t7.6543E7\nKRW-BTC\t20240910\t43617\t7.6543E7\nKRW-BTC\t20240910\t43620\t7.6533E7\nKRW-BTC\t20240910\t43621\t7.6533E7\nKRW-BTC\t20240910\t43623\t7.653E7\nKRW-BTC\t20240910\t43625\t7.6529E7\nKRW-BTC\t20240910\t43627\t7.6527E7\nKRW-BTC\t20240910\t43629\t7.6526E7\nKRW-BTC\t20240910\t43631\t7.6525E7\nKRW-BTC\t20240910\t43634\t7.6527E7\nKRW-BTC\t20240910\t43636\t7.6514E7\nKRW-BTC\t20240910\t43636\t7.6514E7\nKRW-BTC\t20240910\t43640\t7.6525E7\nKRW-BTC\t20240910\t43642\t7.6512E7\nKRW-BTC\t20240910\t43644\t7.6511E7\nKRW-BTC\t20240910\t43646\t7.6516E7\nKRW-BTC\t20240910\t43646\t7.6516E7\nKRW-BTC\t20240910\t43650\t7.6509E7\nKRW-BTC\t20240910\t43650\t7.6509E7\nKRW-BTC\t20240910\t43654\t7.6509E7\nKRW-BTC\t20240910\t43656\t7.6507E7\nKRW-BTC\t20240910\t43659\t7.6507E7\nKRW-BTC\t20240910\t43706\t7.6507E7\nKRW-BTC\t20240910\t43706\t7.6507E7\nKRW-BTC\t20240910\t43713\t7.6507E7\nKRW-BTC\t20240910\t43714\t7.6507E7\nKRW-BTC\t20240910\t43714\t7.6507E7\nKRW-BTC\t20240910\t43718\t7.6507E7\nKRW-BTC\t20240910\t43721\t7.6507E7\nKRW-BTC\t20240910\t43723\t7.6488E7\nKRW-BTC\t20240910\t43724\t7.6486E7\nKRW-BTC\t20240910\t43727\t7.6485E7\nKRW-BTC\t20240910\t43729\t7.6487E7\nKRW-BTC\t20240910\t43731\t7.6481E7\nKRW-BTC\t20240910\t43733\t7.6481E7\nKRW-BTC\t20240910\t43735\t7.6481E7\nKRW-BTC\t20240910\t43737\t7.6481E7\nKRW-BTC\t20240910\t43739\t7.6481E7\nKRW-BTC\t20240910\t43740\t7.6481E7\nKRW-BTC\t20240910\t43743\t7.648E7\nKRW-BTC\t20240910\t43745\t7.648E7\nKRW-BTC\t20240910\t43746\t7.648E7\nKRW-BTC\t20240910\t43750\t7.6478E7\nKRW-BTC\t20240910\t43751\t7.6471E7\nKRW-BTC\t20240910\t43753\t7.6477E7\nKRW-BTC\t20240910\t43755\t7.647E7\nKRW-BTC\t20240910\t43757\t7.647E7\nKRW-BTC\t20240910\t43759\t7.647E7\nKRW-BTC\t20240910\t43801\t7.6468E7\nKRW-BTC\t20240910\t43803\t7.6466E7\nKRW-BTC\t20240910\t43806\t7.6466E7\nKRW-BTC\t20240910\t43808\t7.6468E7\nKRW-BTC\t20240910\t43810\t7.6466E7\nKRW-BTC\t20240910\t43812\t7.6466E7\nKRW-BTC\t20240910\t43813\t7.6466E7\nKRW-BTC\t20240910\t43816\t7.6465E7\nKRW-BTC\t20240910\t43818\t7.6461E7\nKRW-BTC\t20240910\t43820\t7.6461E7\nKRW-BTC\t20240910\t43822\t7.645E7\nKRW-BTC\t20240910\t43822\t7.645E7\nKRW-BTC\t20240910\t43825\t7.6461E7\nKRW-BTC\t20240910\t43828\t7.6432E7\nKRW-BTC\t20240910\t43838\t7.6449E7\nKRW-BTC\t20240910\t43839\t7.6434E7\nKRW-BTC\t20240910\t43843\t7.6445E7\nKRW-BTC\t20240910\t43843\t7.6445E7\nKRW-BTC\t20240910\t43847\t7.6449E7\nKRW-BTC\t20240910\t43848\t7.6449E7\nKRW-BTC\t20240910\t43850\t7.6436E7\nKRW-BTC\t20240910\t43852\t7.6436E7\nKRW-BTC\t20240910\t43854\t7.6445E7\nKRW-BTC\t20240910\t43856\t7.6445E7\nKRW-BTC\t20240910\t43858\t7.6436E7\nKRW-BTC\t20240910\t43902\t7.644E7\nKRW-BTC\t20240910\t43903\t7.6445E7\nKRW-BTC\t20240910\t43903\t7.6461E7\nKRW-BTC\t20240910\t43908\t7.6461E7\nKRW-BTC\t20240910\t43910\t7.6432E7\nKRW-BTC\t20240910\t43911\t7.6439E7\nKRW-BTC\t20240910\t43913\t7.6461E7\nKRW-BTC\t20240910\t43915\t7.648E7\nKRW-BTC\t20240910\t43915\t7.648E7\nKRW-BTC\t20240910\t43919\t7.648E7\nKRW-BTC\t20240910\t43920\t7.648E7\nKRW-BTC\t20240910\t43923\t7.6465E7\nKRW-BTC\t20240910\t43923\t7.6465E7\nKRW-BTC\t20240910\t43923\t7.6465E7\nKRW-BTC\t20240910\t43929\t7.6465E7\nKRW-BTC\t20240910\t43930\t7.6461E7\nKRW-BTC\t20240910\t43932\t7.6465E7\nKRW-BTC\t20240910\t43936\t7.6466E7\nKRW-BTC\t20240910\t43937\t7.648E7\nKRW-BTC\t20240910\t43939\t7.6481E7\nKRW-BTC\t20240910\t43939\t7.6481E7\nKRW-BTC\t20240910\t43944\t7.65E7\nKRW-BTC\t20240910\t43945\t7.65E7\nKRW-BTC\t20240910\t43945\t7.65E7\nKRW-BTC\t20240910\t43949\t7.6493E7\nKRW-BTC\t20240910\t43952\t7.6525E7\nKRW-BTC\t20240910\t43952\t7.6525E7\nKRW-BTC\t20240910\t43956\t7.6525E7\nKRW-BTC\t20240910\t43959\t7.6558E7\nKRW-BTC\t20240910\t44008\t7.6524E7\nKRW-BTC\t20240910\t44008\t7.6524E7\nKRW-BTC\t20240910\t44008\t7.6524E7\nKRW-BTC\t20240910\t44015\t7.6525E7\nKRW-BTC\t20240910\t44015\t7.6525E7\nKRW-BTC\t20240910\t44018\t7.6558E7\nKRW-BTC\t20240910\t44020\t7.6559E7\nKRW-BTC\t20240910\t44021\t7.6558E7\nKRW-BTC\t20240910\t44024\t7.6558E7\nKRW-BTC\t20240910\t44027\t7.6559E7\nKRW-BTC\t20240910\t44029\t7.6558E7\nKRW-BTC\t20240910\t44031\t7.6559E7\nKRW-BTC\t20240910\t44033\t7.6558E7\nKRW-BTC\t20240910\t44033\t7.6558E7\nKRW-BTC\t20240910\t44036\t7.6558E7\nKRW-BTC\t20240910\t44039\t7.6558E7\nKRW-BTC\t20240910\t44039\t7.6558E7\nKRW-BTC\t20240910\t44042\t7.6558E7\nKRW-BTC\t20240910\t44046\t7.6558E7\nKRW-BTC\t20240910\t44047\t7.6558E7\nKRW-BTC\t20240910\t44049\t7.6558E7\nKRW-BTC\t20240910\t44051\t7.6558E7\nKRW-BTC\t20240910\t44051\t7.6558E7\nKRW-BTC\t20240910\t44056\t7.6558E7\nKRW-BTC\t20240910\t44056\t7.6558E7\nKRW-BTC\t20240910\t44056\t7.6558E7\nKRW-BTC\t20240910\t44101\t7.6558E7\nKRW-BTC\t20240910\t44104\t7.6558E7\nKRW-BTC\t20240910\t44105\t7.6558E7\nKRW-BTC\t20240910\t44107\t7.6558E7\nKRW-BTC\t20240910\t44110\t7.6558E7\nKRW-BTC\t20240910\t44111\t7.6558E7\nKRW-BTC\t20240910\t44111\t7.6558E7\nKRW-BTC\t20240910\t44115\t7.6558E7\nKRW-BTC\t20240910\t44115\t7.6558E7\nKRW-BTC\t20240910\t44115\t7.6558E7\nKRW-BTC\t20240910\t44121\t7.6557E7\nKRW-BTC\t20240910\t44121\t7.6557E7\nKRW-BTC\t20240910\t44121\t7.6557E7\nKRW-BTC\t20240910\t44129\t7.6557E7\nKRW-BTC\t20240910\t44137\t7.6559E7\nKRW-BTC\t20240910\t44140\t7.6559E7\nKRW-BTC\t20240910\t44142\t7.6558E7\nKRW-BTC\t20240910\t44143\t7.6559E7\nKRW-BTC\t20240910\t44147\t7.6559E7\nKRW-BTC\t20240910\t44149\t7.6559E7\nKRW-BTC\t20240910\t44149\t7.6559E7\nKRW-BTC\t20240910\t44152\t7.6559E7\nKRW-BTC\t20240910\t44155\t7.6558E7\nKRW-BTC\t20240910\t44157\t7.6559E7\nKRW-BTC\t20240910\t44158\t7.66E7\nKRW-BTC\t20240910\t44201\t7.6599E7\nKRW-BTC\t20240910\t44201\t7.6599E7\nKRW-BTC\t20240910\t44204\t7.6599E7\nKRW-BTC\t20240910\t44207\t7.6562E7\nKRW-BTC\t20240910\t44207\t7.6562E7\nKRW-BTC\t20240910\t44211\t7.66E7\nKRW-BTC\t20240910\t44213\t7.66E7\nKRW-BTC\t20240910\t44213\t7.66E7\nKRW-BTC\t20240910\t44218\t7.6558E7\nKRW-BTC\t20240910\t44219\t7.6558E7\nKRW-BTC\t20240910\t44220\t7.66E7\nKRW-BTC\t20240910\t44220\t7.66E7\nKRW-BTC\t20240910\t44226\t7.6562E7\nKRW-BTC\t20240910\t44226\t7.6562E7\nKRW-BTC\t20240910\t44228\t7.6562E7\nKRW-BTC\t20240910\t44230\t7.6555E7\nKRW-BTC\t20240910\t44233\t7.66E7\nKRW-BTC\t20240910\t44233\t7.66E7\nKRW-BTC\t20240910\t44233\t7.66E7\nKRW-BTC\t20240910\t44240\t7.66E7\nKRW-BTC\t20240910\t44241\t7.66E7\nKRW-BTC\t20240910\t44245\t7.66E7\nKRW-BTC\t20240910\t44245\t7.66E7\nKRW-BTC\t20240910\t44245\t7.66E7\nKRW-BTC\t20240910\t44255\t7.6567E7\nKRW-BTC\t20240910\t44301\t7.6599E7\nKRW-BTC\t20240910\t44301\t7.6599E7\nKRW-BTC\t20240910\t44301\t7.6599E7\nKRW-BTC\t20240910\t44305\t7.6569E7\nKRW-BTC\t20240910\t44307\t7.6569E7\nKRW-BTC\t20240910\t44310\t7.6599E7\nKRW-BTC\t20240910\t44310\t7.6599E7\nKRW-BTC\t20240910\t44313\t7.6569E7\nKRW-BTC\t20240910\t44315\t7.6569E7\nKRW-BTC\t20240910\t44315\t7.6569E7\nKRW-BTC\t20240910\t44315\t7.6569E7\nKRW-BTC\t20240910\t44323\t7.6597E7\nKRW-BTC\t20240910\t44325\t7.6597E7\nKRW-BTC\t20240910\t44325\t7.6597E7\nKRW-BTC\t20240910\t44325\t7.6597E7\nKRW-BTC\t20240910\t44325\t7.6597E7\nKRW-BTC\t20240910\t44333\t7.6597E7\nKRW-BTC\t20240910\t44333\t7.6597E7\nKRW-BTC\t20240910\t44337\t7.6597E7\nKRW-BTC\t20240910\t44339\t7.6597E7\nKRW-BTC\t20240910\t44341\t7.6597E7\nKRW-BTC\t20240910\t44341\t7.6597E7\nKRW-BTC\t20240910\t44346\t7.6597E7\nKRW-BTC\t20240910\t44346\t7.6597E7\nKRW-BTC\t20240910\t44350\t7.6597E7\nKRW-BTC\t20240910\t44350\t7.6597E7\nKRW-BTC\t20240910\t44354\t7.6599E7\nKRW-BTC\t20240910\t44356\t7.6599E7\nKRW-BTC\t20240910\t44357\t7.6597E7\nKRW-BTC\t20240910\t44357\t7.6597E7\nKRW-BTC\t20240910\t44402\t7.6597E7\nKRW-BTC\t20240910\t44402\t7.6597E7\nKRW-BTC\t20240910\t44404\t7.6597E7\nKRW-BTC\t20240910\t44408\t7.6597E7\nKRW-BTC\t20240910\t44408\t7.6597E7\nKRW-BTC\t20240910\t44412\t7.6597E7\nKRW-BTC\t20240910\t44413\t7.6581E7\nKRW-BTC\t20240910\t44413\t7.6581E7\nKRW-BTC\t20240910\t44417\t7.6597E7\nKRW-BTC\t20240910\t44428\t7.6596E7\nKRW-BTC\t20240910\t44428\t7.6596E7\nKRW-BTC\t20240910\t44428\t7.6596E7\nKRW-BTC\t20240910\t44433\t7.6596E7\nKRW-BTC\t20240910\t44433\t7.6596E7\nKRW-BTC\t20240910\t44438\t7.6596E7\nKRW-BTC\t20240910\t44440\t7.6596E7\nKRW-BTC\t20240910\t44443\t7.6594E7\nKRW-BTC\t20240910\t44445\t7.658E7\nKRW-BTC\t20240910\t44447\t7.6593E7\nKRW-BTC\t20240910\t44449\t7.6591E7\nKRW-BTC\t20240910\t44450\t7.6592E7\nKRW-BTC\t20240910\t44450\t7.6592E7\nKRW-BTC\t20240910\t44450\t7.6592E7\nKRW-BTC\t20240910\t44450\t7.6592E7\nKRW-BTC\t20240910\t44450\t7.6592E7\nKRW-BTC\t20240910\t44501\t7.6592E7\nKRW-BTC\t20240910\t44501\t7.6592E7\nKRW-BTC\t20240910\t44501\t7.6592E7\nKRW-BTC\t20240910\t44501\t7.6592E7\nKRW-BTC\t20240910\t44510\t7.6592E7\nKRW-BTC\t20240910\t44510\t7.6592E7\nKRW-BTC\t20240910\t44510\t7.6592E7\nKRW-BTC\t20240910\t44516\t7.6592E7\nKRW-BTC\t20240910\t44516\t7.6592E7\nKRW-BTC\t20240910\t44516\t7.6592E7\nKRW-BTC\t20240910\t44516\t7.6592E7\nKRW-BTC\t20240910\t44516\t7.6592E7\nKRW-BTC\t20240910\t44526\t7.6591E7\nKRW-BTC\t20240910\t44526\t7.6591E7\nKRW-BTC\t20240910\t44526\t7.6591E7\nKRW-BTC\t20240910\t44532\t7.6591E7\nKRW-BTC\t20240910\t44532\t7.6591E7\nKRW-BTC\t20240910\t44532\t7.6591E7\nKRW-BTC\t20240910\t44537\t7.6583E7\nKRW-BTC\t20240910\t44540\t7.6583E7\nKRW-BTC\t20240910\t44542\t7.6583E7\nKRW-BTC\t20240910\t44542\t7.6583E7\nKRW-BTC\t20240910\t44545\t7.6583E7\nKRW-BTC\t20240910\t44547\t7.6591E7\nKRW-BTC\t20240910\t44559\t7.6591E7\nKRW-BTC\t20240910\t44601\t7.6591E7\nKRW-BTC\t20240910\t44602\t7.6585E7\nKRW-BTC\t20240910\t44605\t7.6585E7\nKRW-BTC\t20240910\t44608\t7.6651E7\nKRW-BTC\t20240910\t44608\t7.6651E7\nKRW-BTC\t20240910\t44611\t7.6603E7\nKRW-BTC\t20240910\t44612\t7.6651E7\nKRW-BTC\t20240910\t44614\t7.6676E7\nKRW-BTC\t20240910\t44617\t7.6656E7\nKRW-BTC\t20240910\t44618\t7.6656E7\nKRW-BTC\t20240910\t44620\t7.6676E7\nKRW-BTC\t20240910\t44623\t7.6656E7\nKRW-BTC\t20240910\t44625\t7.6656E7\nKRW-BTC\t20240910\t44627\t7.6656E7\nKRW-BTC\t20240910\t43700\t7.6507E7\nKRW-BTC\t20240910\t43701\t7.6507E7\nKRW-BTC\t20240910\t43704\t7.6507E7\nKRW-BTC\t20240910\t43706\t7.6507E7\nKRW-BTC\t20240910\t43828\t7.6432E7\nKRW-BTC\t20240910\t43833\t7.6449E7\nKRW-BTC\t20240910\t43835\t7.6449E7\nKRW-BTC\t20240910\t43835\t7.6449E7\nKRW-BTC\t20240910\t44000\t7.6525E7\nKRW-BTC\t20240910\t44002\t7.6525E7\nKRW-BTC\t20240910\t44004\t7.6558E7\nKRW-BTC\t20240910\t44004\t7.6558E7\nKRW-BTC\t20240910\t44129\t7.6557E7\nKRW-BTC\t20240910\t44131\t7.6558E7\nKRW-BTC\t20240910\t44131\t7.6558E7\nKRW-BTC\t20240910\t44137\t7.6559E7\nKRW-BTC\t20240910\t44249\t7.6599E7\nKRW-BTC\t20240910\t44252\t7.6599E7\nKRW-BTC\t20240910\t44255\t7.6567E7\nKRW-BTC\t20240910\t44255\t7.6567E7\nKRW-BTC\t20240910\t44417\t7.6597E7\nKRW-BTC\t20240910\t44420\t7.6597E7\nKRW-BTC\t20240910\t44420\t7.6597E7\nKRW-BTC\t20240910\t44420\t7.6597E7\nKRW-BTC\t20240910\t44551\t7.6583E7\nKRW-BTC\t20240910\t44552\t7.6591E7\nKRW-BTC\t20240910\t44554\t7.6591E7\nKRW-BTC\t20240910\t44556\t7.6591E7\nKRW-BTC\t20240910\t43554\t7.659E7\nKRW-BTC\t20240910\t43557\t7.6585E7\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d71"
+            },
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d72"
+            },
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d73"
+            },
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d74"
+            },
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d75"
+            },
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d76"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1725932042275_125838716",
+      "id": "paragraph_1725932042275_125838716",
+      "dateCreated": "2024-09-10 10:34:02.276",
+      "dateStarted": "2024-09-10 13:46:36.619",
+      "dateFinished": "2024-09-10 13:46:37.392",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\nprice_avg \u003d df.select(\u0027trade_price\u0027).groupBy().avg(\u0027trade_price\u0027)\nprice_avg.show()",
+      "user": "anonymous",
+      "dateUpdated": "2024-09-10 13:49:20.476",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-------------------+\n|   avg(trade_price)|\n+-------------------+\n|7.654707741935484E7|\n+-------------------+\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d94"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1725932044292_1954697551",
+      "id": "paragraph_1725932044292_1954697551",
+      "dateCreated": "2024-09-10 10:34:04.292",
+      "dateStarted": "2024-09-10 13:49:20.478",
+      "dateFinished": "2024-09-10 13:49:21.003",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\nfrom pyspark.sql.functions import format_number\n\nprice_avg.select(format_number(\u0027avg(trade_price)\u0027, 2)).show() ",
+      "user": "anonymous",
+      "dateUpdated": "2024-09-10 13:52:14.993",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+----------------------------------+\n|format_number(avg(trade_price), 2)|\n+----------------------------------+\n|                     76,547,077.42|\n+----------------------------------+\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://172.27.42.166:4040/jobs/job?id\u003d112"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1725932045061_1398847060",
+      "id": "paragraph_1725932045061_1398847060",
+      "dateCreated": "2024-09-10 10:34:05.061",
+      "dateStarted": "2024-09-10 13:52:14.996",
+      "dateFinished": "2024-09-10 13:52:15.213",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\n",
+      "user": "anonymous",
+      "dateUpdated": "2024-09-10 13:49:38.892",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1725943778891_899995230",
+      "id": "paragraph_1725943778891_899995230",
+      "dateCreated": "2024-09-10 13:49:38.891",
+      "status": "READY"
+    },
+    {
+      "text": "%pyspark\n",
+      "user": "anonymous",
+      "dateUpdated": "2024-09-10 13:49:39.296",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1725943779296_472188068",
+      "id": "paragraph_1725943779296_472188068",
+      "dateCreated": "2024-09-10 13:49:39.296",
+      "status": "READY"
+    },
+    {
+      "text": "%pyspark\n",
+      "user": "anonymous",
+      "dateUpdated": "2024-09-10 13:49:39.616",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1725943779616_491939441",
+      "id": "paragraph_1725943779616_491939441",
+      "dateCreated": "2024-09-10 13:49:39.616",
+      "status": "READY"
+    },
+    {
+      "text": "%pyspark\n",
+      "user": "anonymous",
+      "dateUpdated": "2024-09-10 13:49:39.968",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1725943779968_574162580",
+      "id": "paragraph_1725943779968_574162580",
+      "dateCreated": "2024-09-10 13:49:39.968",
+      "status": "READY"
+    }
+  ],
+  "name": "spark-streaming",
+  "id": "2K9RY88KC",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}
